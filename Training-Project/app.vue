@@ -1,3 +1,4 @@
+
 @font-face {
   font-family: 'FarAwayGalaxy';
   src: url('/fonts/FarAwayGalaxy.woff') format('woff');
@@ -12,9 +13,17 @@ h1, h3 {
 }
 </style>
 
+<script setup lang="ts">
+const { data } = await useFetch('/api/hello')
+</script>
+
 <template>
-<div>
-  <h1 style="color:#143362"><center>Welcome</center></h1>
+  <div>
+    <pre>{{ data }}</pre>
+    <h1>hello</h1>
+    <h1 style="color:#143362"><center>Welcome</center></h1>
   <h3 style="color:#42f59b"><center>Please enter login credentials</center></h3>
-</div>
+      <!-- <NuxtWelcome /> -->
+  </div>
+ 
 </template>
