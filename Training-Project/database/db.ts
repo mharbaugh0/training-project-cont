@@ -1,4 +1,4 @@
-//Example Database setup
+//Database setup
 import mysql from 'mysql';
 import dotenv from 'dotenv';
 

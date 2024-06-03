@@ -1,3 +1,8 @@
+<script setup lang="ts">
+const { data } = await useFetch('/api/hello')
+</script>
+
+const router = useRouter()
 
 @font-face {
   font-family: 'FarAwayGalaxy';
@@ -13,9 +18,7 @@ h1, h3 {
 }
 </style>
 
-<script setup lang="ts">
-const { data } = await useFetch('/api/hello')
-</script>
+
 
 <template>
   <div>
