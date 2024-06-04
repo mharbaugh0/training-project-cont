@@ -23,7 +23,6 @@ h1, h3 {
 <template>
   <div>
     <pre>{{ data }}</pre>
-    <h1>hello</h1>
     <h1 style="color:#143362"><center>Welcome</center></h1>
   <h3 style="color:#42f59b"><center>Please enter login credentials</center></h3>
       <!-- <NuxtWelcome /> -->
