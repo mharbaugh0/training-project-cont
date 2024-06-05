@@ -1,31 +1,31 @@
-<script setup lang="ts">
-const { data } = await useFetch('/api/hello')
-</script>
-
-const router = useRouter()
-
-@font-face {
-  font-family: 'FarAwayGalaxy';
-  src: url('/fonts/FarAwayGalaxy.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-} <!-- Don't forget to switch this out -->
-
-<style>
-h1, h3 {
-  font-family: 'FarAwayGalaxy', sans-serif;
-}
-</style>
-
-
-
 <template>
   <div>
-    <pre>{{ data }}</pre>
-    <h1 style="color:#143362"><center>Welcome</center></h1>
-  <h3 style="color:#42f59b"><center>Please enter login credentials</center></h3>
-      <!-- <NuxtWelcome /> -->
+    <nav>
+      <nuxt-link to="/register">Register</nuxt-link>
+      <nuxt-link to="/login">Login</nuxt-link>
+      <nuxt-link to="/">Index</nuxt-link>
+    </nav>
+    <NuxtPage />
   </div>
- 
 </template>
+
+
+<style>
+
+nav {
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  padding: 0.5rem 1rem;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+nav a:hover {
+  background-color: #45a049;
+}
+</style>
