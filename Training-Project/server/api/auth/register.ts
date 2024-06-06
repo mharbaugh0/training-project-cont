@@ -1,12 +1,8 @@
 import prisma from '../../../database/db';
 import bcrypt from 'bcrypt';
-import { PrismaClient } from '@prisma/client';
 import { defineEventHandler, readBody } from 'h3';
 
-//Intialize Prisma Client
-const prisma = new PrismaClient();
 
-//
 export default defineEventHandler(async (event) => {
 //Checking if the request method is POST
   if (event.req.method !== 'POST') {
@@ -38,6 +34,8 @@ export default defineEventHandler(async (event) => {
     //If the user is created successfully, send a status code of 201
     event.res.statusCode = 201;
     return { user };
+    console.log('User created successfully');
+
     //If the user creation fails, send a status code of 500 and an error message
   } catch (error: any) {
     event.res.statusCode = 500;

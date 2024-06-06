@@ -1,11 +1,13 @@
 <template>
   <div>
-    <nav>
-      <nuxt-link to="/register">Register</nuxt-link>
-      <nuxt-link to="/login">Login</nuxt-link>
-      <nuxt-link to="/">Index</nuxt-link>
-    </nav>
-    <NuxtPage />
+    <NuxtLoadingIndicator />
+    <NuxtLayout>
+      <nav>
+        <nuxt-link to="/register">Register</nuxt-link>
+        <nuxt-link to="/login">Login</nuxt-link>
+      </nav>
+      <NuxtPage />
+  </NuxtLayout>
   </div>
 </template>
 
