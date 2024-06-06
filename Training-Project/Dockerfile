@@ -1,11 +1,24 @@
+# Dockerfile
 FROM node:20-slim
 
+# Create app directory
 WORKDIR /app
 
-# Install OpenSSL
+# Install dependencies
 RUN apt-get update && apt-get install -y openssl
 
-COPY ./package.json ./package-lock.json ./
+# Install app dependencies
+COPY package.json package-lock.json ./
 RUN npm install
 
-CMD [ "npm", "run", "dev"]
+# Bundle app source
+COPY . .
+
+# Make the entrypoint script and wait-for-it.sh executable
+RUN chmod +x /app/entrypoint.sh /app/wait-for-it.sh
+
+# Expose the port Nuxt will run on
+EXPOSE 3000
+
+# Use custom entrypoint script
+ENTRYPOINT ["./entrypoint.sh"]

@@ -1,0 +1,46 @@
+import prisma from '../../../database/db';
+import bcrypt from 'bcrypt';
+import { PrismaClient } from '@prisma/client';
+import { defineEventHandler, readBody } from 'h3';
+
+//Intialize Prisma Client
+const prisma = new PrismaClient();
+
+//
+export default defineEventHandler(async (event) => {
+//Checking if the request method is POST
+  if (event.req.method !== 'POST') {
+    event.res.statusCode = 405;
+    return { message: 'Method not allowed' };
+  }
+
+  //Reading the body of the request and splitting it into name, email, and password
+  const body = await readBody(event);
+  const { name, email, password } = body;
+
+  //If the name, email, or password fields are missing, send a message
+  if (!name || !email || !password) {
+    event.res.statusCode = 400;
+    return { message: 'Missing fields' };
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  //Creating a new user with the name, email, and hashed password
+  try {
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+      },
+    });
+    //If the user is created successfully, send a status code of 201
+    event.res.statusCode = 201;
+    return { user };
+    //If the user creation fails, send a status code of 500 and an error message
+  } catch (error: any) {
+    event.res.statusCode = 500;
+    return { message: 'User creation failed', error: error.message };
+  }
+});
