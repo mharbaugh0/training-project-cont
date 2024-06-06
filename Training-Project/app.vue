@@ -15,6 +15,8 @@
 nav {
   display: flex;
   gap: 1rem;
+  justify-content: center;
+  align-content: center ;
 }
 
 nav a {
