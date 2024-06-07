@@ -37,19 +37,27 @@ const router = useRouter();
 
 const login = async () => {
   try {
+
+    //A POST request is sent to the /api/auth/login endpoint
     const response = await fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email.value, password: password.value }),
     });
 
+
+    //If the server responds with an error, an error is thrown
     if (!response.ok) {
       throw new Error(await response.text());
     }
 
+    //If the server responds successfully, the token and name are stored 
+    //in the local storage and the user is 
+    //redirected to the welcome page
     const data = await response.json();
     localStorage.setItem('token', data.token);
-    await router.push('/');
+    localStorage.setItem('name', data.name);
+    await router.push('/welcome');
   } catch (err: any) {
     error.value = err.message;
   }
