@@ -9,7 +9,6 @@
   </div>
 </template>
 
-
 <style>
 
 nav {
@@ -30,4 +29,5 @@ nav a {
 nav a:hover {
   background-color: #45a049;
 }
+
 </style>

@@ -1,22 +1,31 @@
 <template>
-  <div>
-    <h1>Login</h1>
-    <form @submit.prevent="login">
-      <div>
-        <label for="email">Email:</label>
-        <input type="email" v-model="email" required />
+  <div class="w-full flex flex-col gap-y-4">
+    <UCard :ui="{ body: { base: 'grid grid-cols-3' } }">
+      <div class="space-y-4">
+        <UFormGroup label="Email" name="email" required input type="email"> 
+          <UInput v-model="form.email" />
+        </UFormGroup>
+
+        <UFormGroup label="Password" name="password" input type="password" >
+          <UInput v-model="form.password" type="password" required />
+        </UFormGroup>
+
+        <UButton variant="soft" type="submit">Login</UButton>
       </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" v-model="password" required />
+
+      <UDivider label="OR" orientation="vertical" />
+
+      <div class="space-y-4 flex flex-col justify-center">
+        <UButton variant="outline" color="black" label="Login with GitHub" icon="i-simple-icons-github" block />
+        <UButton variant="outline" color="black" label="Login with Google" icon="i-simple-icons-google" block />
       </div>
-      <button type="submit">Login</button>
-    </form>
-    <p v-if="error">{{ error }}</p>
+    </UCard>
   </div>
 </template>
 
+
 <script setup lang="ts">
+const form = reactive({ email: 'mail@example.com', password: 'password' })
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 

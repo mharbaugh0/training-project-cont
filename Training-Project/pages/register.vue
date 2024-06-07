@@ -3,18 +3,21 @@
     <h1>Register</h1>
     <form @submit.prevent="register">
       <div>
-        <label for="name">Name:</label>
-        <input type="text" v-model="name" required />
+        <UFormGroup label="Name" required input type="text" v-model="name" description="Asterisk indicates a field is required." >
+        <UInput icon="i-heroicons-lock-closed" />
+        </UFormGroup>
       </div>
       <div>
-        <label for="email">Email:</label>
-        <input type="email" v-model="email" required />
+        <UFormGroup label="Email" required input type="email" v-model="email">
+        <UInput placeholder="you@example.com" icon="i-heroicons-envelope" />
+        </UFormGroup>
       </div>
       <div>
-        <label for="password">Password:</label>
-        <input type="password" v-model="password" required />
+        <UFormGroup label="Password" required input type="password" v-model="password">
+        <UInput icon="i-heroicons-lock-closed" />
+        </UFormGroup>
       </div>
-      <button type="submit">Register</button>
+      <UButton variant="soft" type="submit">Register</UButton>
     </form>
     <p v-if="error">{{ error }}</p>
   </div>
