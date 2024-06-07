@@ -1,10 +1,26 @@
 <template>
+
+    <ClientOnly>
+    <UButton block
+      :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+      color="gray"
+      variant="ghost"
+      aria-label="Theme"
+      @click="isDark = !isDark"
+    />
+    <template #fallback>
+      <div class="w-8 h-8" />
+    </template>
+    </ClientOnly>
+
+    <UDivider
+      :avatar="{ src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4' }" />
   <div>
-    <h1>Register</h1>
+    <h1>Please enter...</h1>
     <form @submit.prevent="register">
       <div>
-        <UFormGroup label="Name" required input type="text" v-model="name" description="Asterisk indicates a field is required." >
-        <UInput icon="i-heroicons-lock-closed" />
+        <UFormGroup label="Name" required input type="text" v-model="name">
+          <UInput></UInput>
         </UFormGroup>
       </div>
       <div>
@@ -21,6 +37,7 @@
     </form>
     <p v-if="error">{{ error }}</p>
   </div>
+
 </template>
 
 <script setup lang="ts">
@@ -34,6 +51,16 @@ const password = ref<string>('');
 const error = ref<string>('');
 
 const router = useRouter();
+
+const colorMode = useColorMode()
+const isDark = computed({
+  get () {
+    return colorMode.value === 'dark'
+  },
+  set () {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  }
+})
 
 const register = async () => {
   try {
