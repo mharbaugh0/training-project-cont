@@ -1,6 +1,5 @@
 <template>
-
-    <ClientOnly>
+  <ClientOnly>
     <UButton block
       :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
       color="gray"
@@ -11,76 +10,69 @@
     <template #fallback>
       <div class="w-8 h-8" />
     </template>
-    </ClientOnly>
+  </ClientOnly>
 
-    <UDivider
-      :avatar="{ src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4' }" />
+  <UDivider :avatar="{ src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4' }" />
+  
   <div>
     <h1>Please enter...</h1>
     <form @submit.prevent="register">
       <div>
-        <UFormGroup label="Name" required input type="text" v-model="name">
-          <UInput></UInput>
+        <UFormGroup label="Name" required>
+          <UInput v-model="form.name" type="text" icon="i-heroicons-lock-closed" />
         </UFormGroup>
       </div>
       <div>
-        <UFormGroup label="Email" required input type="email" v-model="email">
-        <UInput placeholder="you@example.com" icon="i-heroicons-envelope" />
+        <UFormGroup label="Email" required>
+          <UInput v-model="form.email" type="email" icon="i-heroicons-envelope" placeholder="you@example.com" />
         </UFormGroup>
       </div>
       <div>
-        <UFormGroup label="Password" required input type="password" v-model="password">
-        <UInput icon="i-heroicons-lock-closed" />
+        <UFormGroup label="Password" required>
+          <UInput v-model="form.password" type="password" icon="i-heroicons-lock-closed" />
         </UFormGroup>
       </div>
       <UButton variant="soft" type="submit">Register</UButton>
     </form>
     <p v-if="error">{{ error }}</p>
   </div>
-
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-
-const name = ref<string>('');
-const email = ref<string>('');
-const password = ref<string>('');
-const error = ref<string>('');
-
+const form = ref({ name: '', email: '', password: '' });
+const error = ref<string | null>(null);
 const router = useRouter();
 
-const colorMode = useColorMode()
+const colorMode = useColorMode();
 const isDark = computed({
-  get () {
-    return colorMode.value === 'dark'
+  get() {
+    return colorMode.value === 'dark';
   },
-  set () {
-    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  set() {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
   }
-})
+});
 
 const register = async () => {
   try {
-    // Send a POST request to the api endpoint
     const response = await fetch('/api/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      // Convert the form data to a JSON string
-      body: JSON.stringify({ name: name.value, email: email.value, password: password.value }),
+      body: JSON.stringify(form.value)
     });
 
-    // If the server responds with an error, throw an error
     if (!response.ok) {
       throw new Error(await response.text());
     }
 
-    // If the server responds successfully, go to the login page
+    const data = await response.json();
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('name', data.name);
     await router.push('/login');
   } catch (err: any) {
-    // If an error is thrown, set the error message
     error.value = err.message;
   }
 };
