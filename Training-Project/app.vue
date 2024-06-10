@@ -2,10 +2,10 @@
   <div>
     <NuxtLoadingIndicator />
     <NuxtLayout>
-      <nav>
-        <nuxt-link to="/register">Register</nuxt-link>
-        <nuxt-link to="/login">Login</nuxt-link>
-      </nav>
+      <!-- <nav>
+        <nuxt-link v-if-"!isAuthenticated" to="/register">Register</nuxt-link>
+        <nuxt-link v-if-"!isAuthenticated" to="/login">Login</nuxt-link>
+      </nav> -->
       <NuxtPage />
   </NuxtLayout>
   </div>
