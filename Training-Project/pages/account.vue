@@ -1,18 +1,10 @@
 
-<template> 
-
-    <div class="w-full flex flex-col gap-y-4">
-        <div class="space-y-4 flex flex-col justify-content-end">
-          <UVerticalNavigation 
-              :links="links" class="border-b border-gray-200 dark:border-gray-800"
-          />
-        </div>
+<template>
+    <div>
+      <h1>This is the account page</h1>
+      <UVerticalNavigation :links="links" />
     </div>
-      <div>
-        <h1>This is the account page</h1>
-      </div>
-      <UHorizontalNavigation :links="accountOptions" class="border-b border-gray-200 dark:border-gray-800" />
-  
+    <UHorizontalNavigation :links="accountOptions" class="border-b border-gray-200 dark:border-gray-800" />
   </template>
   
   <script setup lang="ts">
@@ -25,7 +17,7 @@
     avatar: {
       src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4'
     },
-    badge: 1
+    badge: 100
   }, {
     label: 'Documentation',
     icon: 'i-heroicons-command-line',
