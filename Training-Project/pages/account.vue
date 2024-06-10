@@ -1,5 +1,57 @@
 
-<template>
+<template> 
 
-</template>
-
+    <div class="w-full flex flex-col gap-y-4">
+        <div class="space-y-4 flex flex-col justify-content-end">
+          <UVerticalNavigation 
+              :links="links" class="border-b border-gray-200 dark:border-gray-800"
+          />
+        </div>
+    </div>
+      <div>
+        <h1>This is the account page</h1>
+      </div>
+      <UHorizontalNavigation :links="accountOptions" class="border-b border-gray-200 dark:border-gray-800" />
+  
+  </template>
+  
+  <script setup lang="ts">
+  import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
+  
+  const links = [{
+    label: 'Account',
+    to: '/account', 
+    avatar: {
+      src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4'
+    },
+    badge: 1
+  }, {
+    label: 'Documentation',
+    icon: 'i-heroicons-command-line',
+    to: 'https://github.com/bioneos/training-project/tree/main',
+  }, {
+    label: 'Settings',
+    icon: 'i-heroicons-cog-6-tooth',
+    to: '/components/command-palette'
+  }]
+  
+  
+  const accountOptions = [{
+    label: 'View & Change Display Name',
+    avatar: {
+      src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4'
+    },
+  }, {
+    label: 'View & Change Email',
+    icon: "i-heroicons-envelope",
+  }, {
+    label: 'Password Reset',
+    icon: "i-heroicons-lock-closed",
+  }, {
+    label: 'Delete Account',
+    icon: 'i-heroicons-trash',
+  }]
+  
+  </script>
+  

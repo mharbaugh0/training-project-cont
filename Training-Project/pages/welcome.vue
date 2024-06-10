@@ -15,6 +15,7 @@ const router = useRouter();
 const links = [
   {
     label: 'Account',
+    to: '/account',
     avatar: {
       src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4'
     },
