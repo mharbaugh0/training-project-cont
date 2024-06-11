@@ -1,6 +1,5 @@
 
 <template>
-<<<<<<< HEAD
     <div>
       <h1>This is the account page</h1>
       <UVerticalNavigation :links="links" />
@@ -9,53 +8,11 @@
   </template>
   
   <script setup lang="ts">
-  import { ref } from 'vue';
-  import { useRouter } from 'vue-router';
-  
-  const links = [{
-    label: 'Account',
-    to: '/account', 
-    avatar: {
-      src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4'
-    },
-    badge: 100
-  }, {
-    label: 'Documentation',
-    icon: 'i-heroicons-command-line',
-    to: 'https://github.com/bioneos/training-project/tree/main',
-  }, {
-    label: 'Settings',
-    icon: 'i-heroicons-cog-6-tooth',
-    to: '/components/command-palette'
-  }]
-  
-  
-  const accountOptions = [{
-    label: 'View & Change Display Name',
-    avatar: {
-      src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4'
-    },
-  }, {
-    label: 'View & Change Email',
-    icon: "i-heroicons-envelope",
-  }, {
-    label: 'Password Reset',
-    icon: "i-heroicons-lock-closed",
-  }, {
-    label: 'Delete Account',
-    icon: 'i-heroicons-trash',
-  }]
-  
-  </script>
-  
-=======
-
-</template>
-
-<script setup lang="ts">
-    definePageMeta({
+  definePageMeta({
         layout: 'default'
     })
-</script>
+  </script>
+  
 
->>>>>>> navbar
+
+
