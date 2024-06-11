@@ -5,7 +5,14 @@
   </div>
 </template>
 
+
+
 <script setup lang="ts">
+
+definePageMeta({
+        layout: 'default'
+    })
+
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
