@@ -14,8 +14,8 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-# Make the entrypoint script and wait-for-it.sh executable
-RUN chmod +x /app/entrypoint.sh /app/wait-for-it.sh
+# Make the entrypoint script
+RUN chmod +x /app/entrypoint.sh 
 
 # Expose the port Nuxt will run on
 EXPOSE 3000

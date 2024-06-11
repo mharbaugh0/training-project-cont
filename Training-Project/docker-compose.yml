@@ -10,12 +10,9 @@ services:
     volumes:
       - .:/app
     depends_on:
-      - db
-    environment:
-      DB_HOST: db
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_DATABASE: ${DB_DATABASE}
+      db:
+        condition: service_healthy
+    
 
   db:
     image: mariadb:10.11
@@ -35,11 +32,8 @@ services:
     volumes:
       - .:/app
     working_dir: /app
-    command: npx prisma migrate dev
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
-      DB_HOST: db
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_DATABASE: ${DB_DATABASE}
+      PRISMA_DATABASE_CONNECTION_URL: ${PRISMA_DATABASE_CONNECTION_URL}
