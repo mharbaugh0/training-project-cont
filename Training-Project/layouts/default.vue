@@ -4,7 +4,9 @@
           <Logo />
         <ClientOnly>
             <Navbar/>
-            <UVerticalNavigation :links="links" />
+            <UVerticalNavigation 
+            :links="links" 
+          />
         </ClientOnly>
         <NuxtPage />
         </div>
@@ -80,8 +82,18 @@
 
 <style>
 header {
+  padding: 15px;
+}
+
+ul {
+  margin: 20;
   padding: 20px;
 }
+
+li {
+  padding: 1px;
+}
+
 </style>
   
  
