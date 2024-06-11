@@ -1,11 +1,19 @@
 <template>
   <div>
     <h1>Welcome, {{ name }}</h1>
+    <h2>This is the home page</h2>
     <UVerticalNavigation :links="links" />
   </div>
 </template>
 
+
+
 <script setup lang="ts">
+
+definePageMeta({
+        layout: 'default'
+    })
+
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 

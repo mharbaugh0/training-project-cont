@@ -1,5 +1,6 @@
 
 <template>
+<<<<<<< HEAD
     <div>
       <h1>This is the account page</h1>
       <UVerticalNavigation :links="links" />
@@ -47,3 +48,14 @@
   
   </script>
   
+=======
+
+</template>
+
+<script setup lang="ts">
+    definePageMeta({
+        layout: 'default'
+    })
+</script>
+
+>>>>>>> navbar

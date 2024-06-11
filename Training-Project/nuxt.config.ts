@@ -1,3 +1,5 @@
+import checkPublicRoute from "./server/middleware/checkPublicRoute";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -13,7 +15,7 @@ export default defineNuxtConfig({
     jwtSecret: process.env.JWT_SECRET,
   },
   router: {
-    middleware: ['auth']
+    middleware: ['auth', 'checkPublicRoute']
   }
 
 });

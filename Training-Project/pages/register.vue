@@ -38,7 +38,14 @@
   </div>
 </template>
 
+
+
 <script setup lang="ts">
+
+definePageMeta({
+        layout: 'public'
+    })
+
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 

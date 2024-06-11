@@ -1,52 +1,45 @@
 <template>
-    <div>
-      <ClientOnly>
-        <Navbar v-if="isAuthenticated" />
-        <nav v-else>
-          <nuxt-link to="/register">Register</nuxt-link>
-          <nuxt-link to="/login">Login</nuxt-link>
-        </nav>
-      </ClientOnly>
-      <NuxtPage />
-    </div>
+    <header>
+        <div>
+        <ClientOnly>
+            <Navbar/>
+        </ClientOnly>
+        <NuxtPage />
+        </div>
+    </header>
   </template>
   
   <script setup>
   import { ref, onMounted, watch } from 'vue';
+  import { useRoute } from 'vue-router';
   import Navbar from '~/components/Navbar.vue';
-  import { useRouter } from 'vue-router';
   
   const isAuthenticated = ref(false);
-  const router = useRouter();
+  const isPublicRoute = ref(false);
+  
+  const publicPages = ['/login', '/register'];
+  
+  const route = useRoute();
+  
+  const updateAuthState = () => {
+    if (process.client) {
+      isAuthenticated.value = !!localStorage.getItem('token');
+      isPublicRoute.value = publicPages.includes(route.path);
+    }
+  };
+  
+  watch(
+    () => route.path,
+    () => {
+      updateAuthState();
+    },
+    { immediate: true }
+  );
   
   onMounted(() => {
-    isAuthenticated.value = !!localStorage.getItem('token');
-  });
-  
-  // Watch for route changes to update the authentication state
-  router.afterEach(() => {
-    isAuthenticated.value = !!localStorage.getItem('token');
+    updateAuthState();
   });
   </script>
   
-  <style>
-  nav {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    align-content: center;
-  }
-  
-  nav a {
-    padding: 0.5rem 1rem;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-  }
-  
-  nav a:hover {
-    background-color: #45a049;
-  }
-  </style>
+ 
   

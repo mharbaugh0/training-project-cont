@@ -51,7 +51,13 @@
   </form>
 </template>
 
+
 <script setup lang="ts">
+
+definePageMeta({
+        layout: 'public'
+    })
+
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -89,4 +95,5 @@ const login = async () => {
     error.value = err.message;
   }
 };
+
 </script>
