@@ -1,6 +1,7 @@
 <template>
     <header>
         <div>
+          <Logo />
         <ClientOnly>
             <nav>
                 <nuxt-link to="/register">Register</nuxt-link>
@@ -33,5 +34,9 @@ nav a {
 
 nav a:hover {
   background-color: #45a049;
+}
+
+header {
+  padding: 20px;
 }
 </style>

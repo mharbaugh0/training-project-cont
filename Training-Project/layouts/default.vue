@@ -1,6 +1,7 @@
 <template>
     <header>
         <div>
+          <Logo />
         <ClientOnly>
             <Navbar/>
             <UVerticalNavigation :links="links" />
@@ -76,6 +77,12 @@
   }]
 
   </script>
+
+<style>
+header {
+  padding: 20px;
+}
+</style>
   
  
   
