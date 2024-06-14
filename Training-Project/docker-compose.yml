@@ -13,7 +13,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      PRISMA_DATABASE_CONNECTION_URL: "mysql://${DATABASE_CONTAINER_USERNAME}:${DATABASE_CONTAINER_PASSWORD}@db:3306/${MYSQL_DATABASE}"
+      PRISMA_DATABASE_CONNECTION_URL: ${PRISMA_DATABASE_CONNECTION_URL}
 
   db:
     build:
