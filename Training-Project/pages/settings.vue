@@ -30,6 +30,7 @@ function onSubmitPassword () {
 </script>
 
 <template>
+  <div>
   <UTabs :items="items" class="w-full">
     <template #account="{ item }">
       <UCard @submit.prevent="onSubmitAccount">
@@ -55,7 +56,9 @@ function onSubmitPassword () {
           </UButton>
         </template>
       </UCard>
+      
     </template>
+    
 
     <template #password="{ item }">
       <UCard @submit.prevent="onSubmitPassword">
@@ -83,6 +86,7 @@ function onSubmitPassword () {
       </UCard>
     </template>
   </UTabs>
+</div>
 </template>
 
 

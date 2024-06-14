@@ -26,14 +26,3 @@ services:
       interval: 15s
       timeout: 10s
       retries: 3
-
-  prisma:
-    image: node:14
-    volumes:
-      - .:/app
-    working_dir: /app
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      PRISMA_DATABASE_CONNECTION_URL: ${PRISMA_DATABASE_CONNECTION_URL}
