@@ -2,15 +2,15 @@
     <header>
         <div>
           <Logo />
-        <ClientOnly>
-            <Navbar/>
-            <UVerticalNavigation 
-            :links="links" 
-          />
-        </ClientOnly>
-        <NuxtPage />
+          <Navbar/>
+        
         </div>
     </header>
+    <div>
+      <ClientOnly>
+        <NuxtPage />
+      </ClientOnly>
+     </div>
   </template>
   
   <script setup>
