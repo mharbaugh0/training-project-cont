@@ -55,6 +55,7 @@ Ensure you have the following installed:
 
 ### Start-up Page
 This is the page that appears when the application is first initialized.
+![Start-up page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/startup.png)
 
 ### Register Page
 - Accessible via the ‘Register’ button in the navigation bar.
