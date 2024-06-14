@@ -1,7 +1,7 @@
 <template>
     <nav>
       <ul>
-        <li><a href="/welcome" @click.prevent="navigate('/')">Home</a></li>
+        <li><a href="/welcome" @click.prevent="navigate('/welcome')">Home</a></li>
         <li><a href="/settings" @click.prevent="navigate('/settings')">Settings</a></li>
         <li><a href="https://github.com/bioneos/training-project/tree/main" target="_blank">Repo</a></li>
         <li><a href="#" @click.prevent="logout">Logout</a></li>
