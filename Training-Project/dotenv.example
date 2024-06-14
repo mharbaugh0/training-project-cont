@@ -1,6 +1,15 @@
-MYSQL_ROOT_PASSWORD=root
-MYSQL_DATABASE=training
+# Database container credentials (All required)
+DATABASE_CONTAINER_NAME=
+DATABASE_CONTAINER_USERNAME=
+DATABASE_CONTAINER_PASSWORD=
+DATABASE_NAME=
 
-PRISMA_DATABASE_CONNECTION_URL=mysql://root:root@db:3306/training
+# MYSQL database credentials (All required)
+MYSQL_ROOT_PASSWORD=
+MYSQL_DATABASE=
 
-JWT_SECRET=secret
+# JSON Web Token (Required)
+JWT_SECRET=
+
+# Note: For the database container name, you can find it in the docker-compose.yml. 
+# The JSON Web Token is used for authentication and can be generated using a secret key.

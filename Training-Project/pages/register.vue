@@ -49,6 +49,7 @@ definePageMeta({
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
+//Define the form and error variables
 const form = ref({ name: '', email: '', password: '' });
 const error = ref<string | null>(null);
 const router = useRouter();
@@ -65,16 +66,19 @@ const isDark = computed({
 
 const register = async () => {
   try {
+    //Send the registration request to the server
     const response = await fetch('/api/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form.value)
     });
 
+    // Handle non-ok response
     if (!response.ok) {
       throw new Error(await response.text());
     }
-
+   
+    // Store token and name in local storage and redirect to login page
     const data = await response.json();
     localStorage.setItem('token', data.token);
     localStorage.setItem('name', data.name);
