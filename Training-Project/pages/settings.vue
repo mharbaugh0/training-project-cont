@@ -10,6 +10,7 @@ const items = [{
   label: 'Password'
 }]
 
+//Define the name ref
 const name = ref<string | null>(null);
 const router = useRouter();
 const storedName = localStorage.getItem('name');
