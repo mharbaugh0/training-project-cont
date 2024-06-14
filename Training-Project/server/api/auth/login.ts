@@ -51,7 +51,7 @@ export default defineEventHandler(async (event) => {
     }
 
     //If the password is valid, a JSON Web Token (JWT) is created and returned to the client.
-    const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.id }, JWT_SECRET || '');
     console.log('User authenticated successfully:', user.id);
 
     return { token, name: user.name };
