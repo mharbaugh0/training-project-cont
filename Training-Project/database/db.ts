@@ -1,5 +1,4 @@
 //Database setup
-// Database setup
 import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 
