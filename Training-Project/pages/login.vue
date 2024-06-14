@@ -2,10 +2,10 @@
   <ClientOnly>
     <UButton block
       :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
-      color="gray"
       variant="ghost"
       aria-label="Theme"
       @click="isDark = !isDark"
+      class="flex justify-end pr-5"
     />
     <template #fallback>
       <div class="w-8 h-8" />
@@ -36,7 +36,7 @@
             to="https://github.com/login"
             active-class="text-primary"
             inactive-class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
-            <UButton variant="outline" color="black" label="Login with GitHub" icon="i-simple-icons-github" block />
+            <UButton variant="outline" color="black" label="Login with GitHub" icon="i-logos-github-icon" block />
           </ULink>
 
           <ULink

@@ -4,16 +4,19 @@
           <Logo />
         <ClientOnly>
             <Navbar/>
-            <UVerticalNavigation 
-            :links="links" 
-          />
+            <UVerticalNavigation
+              :links="links"
+              :ui="{
+                label: 'truncate relative text-gray-900 dark:text-white flex-initial text-left'
+              }"
+            />
         </ClientOnly>
         <NuxtPage />
         </div>
     </header>
   </template>
   
-  <script setup>
+<script setup>
   import { ref, onMounted, watch } from 'vue';
   import { useRoute } from 'vue-router';
   import Navbar from '~/components/Navbar.vue';

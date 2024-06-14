@@ -2,10 +2,10 @@
   <ClientOnly>
     <UButton block
       :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
-      color="gray"
       variant="ghost"
       aria-label="Theme"
       @click="isDark = !isDark"
+      class="flex justify-end pr-5"
     />
     <template #fallback>
       <div class="w-8 h-8" />
@@ -78,6 +78,7 @@ const register = async () => {
     const data = await response.json();
     localStorage.setItem('token', data.token);
     localStorage.setItem('name', data.name);
+    localStorage.setItem('email', data.email)
     await router.push('/login');
   } catch (err: any) {
     error.value = err.message;

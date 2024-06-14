@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
 const items = [{
   slot: 'account',
   label: 'Account'
@@ -7,8 +10,13 @@ const items = [{
   label: 'Password'
 }]
 
-const accountForm = reactive({ name: '', username: '' })
+const name = ref<string | null>(null);
+const router = useRouter();
+const storedName = localStorage.getItem('name');
+
+const accountForm = reactive({ name: storedName, email: '' })
 const passwordForm = reactive({ currentPassword: '', newPassword: '' })
+
 
 function onSubmitAccount () {
   console.log('Submitted form:', accountForm)
@@ -17,6 +25,8 @@ function onSubmitAccount () {
 function onSubmitPassword () {
   console.log('Submitted form:', passwordForm)
 }
+
+
 </script>
 
 <template>
@@ -32,11 +42,11 @@ function onSubmitPassword () {
           </p>
         </template>
 
-        <UFormGroup label="Name" name="name" class="mb-3">
+        <UFormGroup label="Display Name" name="name" class="mb-3">
           <UInput v-model="accountForm.name" />
         </UFormGroup>
-        <UFormGroup label="Username" name="username">
-          <UInput v-model="accountForm.username" />
+        <UFormGroup label="Email" name="email">
+          <UInput v-model="accountForm.email" />
         </UFormGroup>
 
         <template #footer>
