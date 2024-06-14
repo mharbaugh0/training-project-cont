@@ -61,28 +61,35 @@ This is the page that appears when the application is first initialized.
 - Accessible via the ‘Register’ button in the navigation bar.
 - Requires a valid email address for registration.
 - Users are prompted to log in after successful registration.
+![Register page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/register.png)
 
 ### Login Page
 - Accessible via the ‘Login’ button in the navigation bar.
 - Only registered accounts can log in.
+![Login page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/login.png)
 
 ### Color Mode
 - Toggle button available on Login and Registration pages.
 - Switches between dark mode (moon icon) and light mode (sun icon).
+  ![Dark mode button](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/dark-mode-active.png)
+  ![Light mode button](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/light-mode-active.png)
 
 ### Welcome Page
 - Displays a welcome message with the user’s name (except on first login).
 - Navigation options: Home, Account, Documentation, Settings, Logout.
+  ![Welcome page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/welcome.png)
 
 ### Account Page
 
 #### Account Tab
 - Allows users to change their display name and email.
 - Changes are saved to the database upon clicking ‘Save account’.
+![Account page, account tab](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/account-account.png)
 
 #### Password Tab
 - Allows users to reset their password.
 - Changes are saved to the database upon clicking ‘Save changes’.
+![Account page, password tab](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/account-password.png)
 
 
 
