@@ -1,0 +1,6 @@
+# Dockerfile.db
+FROM mariadb:10.11
+
+# Copy the initdb.sh script and make it executable
+COPY ./initdb.sh /docker-entrypoint-initdb.d/initdb.sh
+RUN chmod +x /docker-entrypoint-initdb.d/initdb.sh
