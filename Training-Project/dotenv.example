@@ -1,15 +1,19 @@
 # Database container credentials (All required)
-DATABASE_CONTAINER_NAME=
+DATABASE_CONTAINER_NAME=db 
 DATABASE_CONTAINER_USERNAME=
 DATABASE_CONTAINER_PASSWORD=
 DATABASE_NAME=
 
 # MYSQL database credentials (All required)
-MYSQL_ROOT_PASSWORD=
-MYSQL_DATABASE=
+MYSQL_ROOT_PASSWORD=super_secure_password
+MYSQL_DATABASE=my_database
 
 # JSON Web Token (Required)
-JWT_SECRET=
+JWT_SECRET=your_secret_key
 
-# Note: For the database container name, you can find it in the docker-compose.yml. 
-# The JSON Web Token is used for authentication and can be generated using a secret key.
+# Note:
+# 1. For the database container name, you can find it in the docker-compose.yml.
+# 2. The JSON Web Token is used for authentication and can be generated using a secret key.
+# 3. Avoid using single-digit numbers for database names and credentials to prevent syntax errors.
+#    Use meaningful, descriptive names instead.
+# 4. The DATABASE_CONTAINER_NAME is set to "db" to reflect the dockerfile name for the container.
