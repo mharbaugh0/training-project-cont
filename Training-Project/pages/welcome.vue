@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>Welcome, {{ name }}</h1>
+    <h1 class="font-serif text-2xl pl-3">Welcome, {{ name }}</h1>
+    <body class="min-h-screen bg-gradient-to-t from-green-300 to-30% opacity-40"></body>
   </div>
 </template>
 

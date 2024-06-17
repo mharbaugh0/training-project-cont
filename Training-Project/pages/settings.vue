@@ -11,11 +11,13 @@ const items = [{ //Account settings tabs
 }]
 
 //Define the name ref
-const name = ref<string | null>(null);
+const form = ref({ name: '', email: ''});
 const router = useRouter();
-const storedName = localStorage.getItem('name');
 
-const accountForm = reactive({ name: storedName, email: '' })
+const storedName = localStorage.getItem('name');
+const storedEmail = localStorage.getItem('email');
+
+const accountForm = reactive({ name: storedName, email: storedEmail })
 const passwordForm = reactive({ currentPassword: '', newPassword: '' })
 
 
@@ -47,7 +49,7 @@ function onSubmitPassword () {
         <UFormGroup label="Display Name" name="name" class="mb-3">
           <UInput v-model="accountForm.name" />
         </UFormGroup>
-        <UFormGroup label="Email" name="email">
+        <UFormGroup label="Email" name="name">
           <UInput v-model="accountForm.email" />
         </UFormGroup>
 
@@ -78,6 +80,7 @@ function onSubmitPassword () {
         <UFormGroup label="New Password" name="new" required>
           <UInput v-model="passwordForm.newPassword" type="password" required />
         </UFormGroup>
+        
 
         <template #footer>
           <UButton type="submit" color="black">
@@ -85,8 +88,10 @@ function onSubmitPassword () {
           </UButton>
         </template>
       </UCard>
+      
     </template>
   </UTabs>
+  <body class="min-h-screen bg-gradient-to-t from-green-300 to-60% opacity-40"></body>
 </div>
 </template>
 
