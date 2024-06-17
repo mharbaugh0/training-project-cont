@@ -1,5 +1,5 @@
 <template>
-  <ClientOnly>
+  <ClientOnly> <!--Dark mode button-->
     <UButton block
       :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
       variant="ghost"
@@ -16,7 +16,7 @@
   
   <div>
     <h1>Please enter...</h1>
-    <form @submit.prevent="register">
+    <form @submit.prevent="register"> <!--Register form-->
       <div>
         <UFormGroup label="Name" required>
           <UInput v-model="form.name" type="text" icon="i-heroicons-lock-closed" />
@@ -54,6 +54,7 @@ const form = ref({ name: '', email: '', password: '' });
 const error = ref<string | null>(null);
 const router = useRouter();
 
+//Color mode button functionality
 const colorMode = useColorMode();
 const isDark = computed({
   get() {

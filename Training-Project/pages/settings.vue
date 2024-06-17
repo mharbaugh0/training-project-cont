@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
-const items = [{
+const items = [{ //Account settings tabs
   slot: 'account',
   label: 'Account'
 }, {
@@ -32,8 +32,8 @@ function onSubmitPassword () {
 
 <template>
   <div>
-  <UTabs :items="items" class="w-full">
-    <template #account="{ item }">
+  <UTabs :items="items" class="w-full"> 
+    <template #account="{ item }"> <!--Account settings form, Account tab-->
       <UCard @submit.prevent="onSubmitAccount">
         <template #header>
           <p class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
@@ -61,7 +61,7 @@ function onSubmitPassword () {
     </template>
     
 
-    <template #password="{ item }">
+    <template #password="{ item }"> <!--Account settings form, Password tab-->
       <UCard @submit.prevent="onSubmitPassword">
         <template #header>
           <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">

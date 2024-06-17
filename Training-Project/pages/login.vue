@@ -1,5 +1,5 @@
 <template>
-  <ClientOnly>
+  <ClientOnly>  <!--Dark mode button-->
     <UButton block
       :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
       variant="ghost"
@@ -14,7 +14,7 @@
 
   <UDivider :avatar="{ src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4' }" />
 
-  <form @submit.prevent="login">
+  <form @submit.prevent="login"> <!--Login form-->
     <div class="w-full flex flex-col gap-y-4">
       <UCard :ui="{ body: { base: 'grid grid-cols-3' } }">
         <div class="space-y-4">
@@ -67,6 +67,7 @@ const form = ref({ email: '', password: '' });
 const error = ref<string | null>(null);
 const router = useRouter();
 
+//Color mode button functionality
 const colorMode = useColorMode();
 const isDark = computed({
   get() {

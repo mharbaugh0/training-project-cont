@@ -3,7 +3,6 @@
         <div>
           <Logo />
           <Navbar/>
-        
         </div>
     </header>
     <div>
@@ -43,11 +42,7 @@
   onMounted(() => {
     updateAuthState();
   });
-  
-  
-  
-  
-  
+
   </script>
 
 <style>

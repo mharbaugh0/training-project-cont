@@ -14,13 +14,8 @@
       <ClientOnly>
         <NuxtPage />
       </ClientOnly>
-     </div>
-
-
-  </template>
-
-
-
+    </div>
+</template>
 
 <style>
 nav {
