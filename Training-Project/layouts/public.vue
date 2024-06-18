@@ -1,7 +1,7 @@
 <template>
   <div class="relative w-full max-w-6xl px-6 pt-6 mx-auto lg:px-16">
     <header class="relative w-full mx-auto space-y-4 md:flex md:items-center md:space-y-0 md:gap-x-4">
-      <div class="flex items-center bg-gray-900 justify-between py-2 px-6 md:flex-1 rounded-card">
+      <div class="flex items-center rounded-full border-dotted border-2 border-gray-500 justify-between py-2 px-6 md:flex-1">
       <Logo />
             <nav class="hidden md:flex md:space-x-4 lg:space-x-6">
                 <nuxt-link to="/register">Register</nuxt-link>
@@ -40,4 +40,5 @@ nav a:hover {
 header {
   padding: 20px;
 }
+
 </style>

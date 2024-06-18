@@ -93,7 +93,7 @@ function onSubmitPassword () {
   </UTabs>
   <body class="min-h-screen bg-gradient-to-t from-green-300 to-60% opacity-40"></body>
 </div>
-</template>
+</template> 
 
 
   
