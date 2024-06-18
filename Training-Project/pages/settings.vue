@@ -1,36 +1,4 @@
 
-<<<<<<< HEAD
-const items = [{ //Account settings tabs
-  slot: 'account',
-  label: 'Account'
-}, {
-  slot: 'password',
-  label: 'Password'
-}]
-
-//Define the name ref
-const form = ref({ name: '', email: ''});
-const router = useRouter();
-
-const storedName = localStorage.getItem('name');
-const storedEmail = localStorage.getItem('email');
-
-const accountForm = reactive({ name: storedName, email: storedEmail })
-const passwordForm = reactive({ currentPassword: '', newPassword: '' })
-
-
-function onSubmitAccount () {
-  console.log('Submitted form:', accountForm)
-}
-
-function onSubmitPassword () {
-  console.log('Submitted form:', passwordForm)
-}
-
-
-</script>
-=======
->>>>>>> pass-reset
 
 <template>
   <div>
@@ -80,13 +48,9 @@ function onSubmitPassword () {
         <UFormGroup label="New Password" name="new" required class="mb-3">
           <UInput v-model="passwordForm.newPassword" type="password" required />
         </UFormGroup>
-<<<<<<< HEAD
-        
-=======
         <UFormGroup label="Confirm New Password" name="confirmNew" required>
           <UInput v-model="passwordForm.confirmedNewPassword" type="password" required />
         </UFormGroup>
->>>>>>> pass-reset
 
         <template #footer>
           <UButton type="submit" color="black">

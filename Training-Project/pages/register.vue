@@ -1,21 +1,6 @@
 <template>
-<<<<<<< HEAD
-  <ClientOnly> <!--Dark mode button-->
-    <UButton block
-      :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
-      variant="ghost"
-      aria-label="Theme"
-      @click="isDark = !isDark"
-      class="flex justify-end pr-5"
-    />
-    <template #fallback>
-      <div class="w-8 h-8" />
-    </template>
-  </ClientOnly>
 
-  <UDivider :avatar="{ src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4' }" />
-=======
->>>>>>> pass-reset
+
   
   <div>
     <h1>Please enter...</h1>
@@ -57,16 +42,7 @@ const form = ref({ name: '', email: '', password: '' });
 const error = ref<string | null>(null);
 const router = useRouter();
 
-//Color mode button functionality
-const colorMode = useColorMode();
-const isDark = computed({
-  get() {
-    return colorMode.value === 'dark';
-  },
-  set() {
-    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
-  }
-});
+
 
 const register = async () => {
   try {

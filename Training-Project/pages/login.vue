@@ -53,16 +53,7 @@ const form = ref({ email: '', password: '' });
 const error = ref<string | null>(null);
 const router = useRouter();
 
-//Color mode button functionality
-const colorMode = useColorMode();
-const isDark = computed({
-  get() {
-    return colorMode.value === 'dark';
-  },
-  set() {
-    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
-  }
-});
+
 // Define the cookies
 const tokenCookie = useCookie('token');
 const nameCookie = useCookie('name');
