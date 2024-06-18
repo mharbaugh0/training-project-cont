@@ -1,20 +1,5 @@
 <template>
-  <ClientOnly>  <!--Dark mode button-->
-    <UButton block
-      :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
-      variant="ghost"
-      aria-label="Theme"
-      @click="isDark = !isDark"
-      class="flex justify-end pr-5"
-    />
-    <template #fallback>
-      <div class="w-8 h-8" />
-    </template>
-  </ClientOnly>
-
-  <UDivider :avatar="{ src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4' }" />
-
-  <form @submit.prevent="login"> <!--Login form-->
+  <form @submit.prevent="login">
     <div class="w-full flex flex-col gap-y-4">
       <UCard :ui="{ body: { base: 'grid grid-cols-3' } }">
         <div class="space-y-4">
@@ -27,6 +12,7 @@
           </UFormGroup>
 
           <UButton variant="soft" type="submit">Login</UButton>
+          <div v-if="error" style="color: red; font-weight: bold;">{{ error }}</div>
         </div>
 
         <UDivider label="OR" orientation="vertical" />
@@ -62,7 +48,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 
-//Define the form and error refs
+/// Define the form and error refs
 const form = ref({ email: '', password: '' });
 const error = ref<string | null>(null);
 const router = useRouter();
@@ -77,29 +63,43 @@ const isDark = computed({
     colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
   }
 });
+// Define the cookies
+const tokenCookie = useCookie('token');
+const nameCookie = useCookie('name');
+const emailCookie = useCookie('email');
+const idCookie = useCookie('id')
 
 const login = async () => {
   try {
-    //Send a login request to the server
+    // Send a login request to the server
     const response = await fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form.value)
     });
 
-    //Handle the non-ok response
+    // Handle the non-ok response
     if (!response.ok) {
-      throw new Error(await response.text());
+      const errorText = await response.text();
+      throw new Error(errorText);
     }
 
-    // Store token and name in local storage and redirect to welcome page
+    // Store token, name, id, and email in cookies and local storage
     const data = await response.json();
+
+    tokenCookie.value = data.token;
+    nameCookie.value = data.name;
+    emailCookie.value = data.email;
+    idCookie.value = data.id;
+
     localStorage.setItem('token', data.token);
     localStorage.setItem('name', data.name);
+    localStorage.setItem('email', data.email);
+    localStorage.setItem('id', data.id);
+
     await router.push('/welcome');
   } catch (err: any) {
     error.value = err.message;
   }
 };
-
 </script>

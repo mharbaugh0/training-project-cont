@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <ClientOnly> <!--Dark mode button-->
     <UButton block
       :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
@@ -13,6 +14,8 @@
   </ClientOnly>
 
   <UDivider :avatar="{ src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4' }" />
+=======
+>>>>>>> pass-reset
   
   <div>
     <h1>Please enter...</h1>
@@ -84,6 +87,8 @@ const register = async () => {
     localStorage.setItem('token', data.token);
     localStorage.setItem('name', data.name);
     localStorage.setItem('email', data.email)
+    localStorage.setItem('id', data.id)
+    console.log(data)
     await router.push('/login');
   } catch (err: any) {
     error.value = err.message;

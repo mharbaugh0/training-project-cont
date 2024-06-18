@@ -47,14 +47,15 @@ export default defineEventHandler(async (event) => {
     if (!isPasswordValid) {
       event.res.statusCode = 401;
       console.log('Invalid password');
-      return { message: 'Invalid email or password' };
+
+      return ('Invalid Password');
     }
 
     //If the password is valid, a JSON Web Token (JWT) is created and returned to the client.
     const token = jwt.sign({ userId: user.id }, JWT_SECRET || '');
     console.log('User authenticated successfully:', user.id);
 
-    return { token, name: user.name };
+    return { token, name: user.name, email: user.email, id: user.id};
   } catch (error: any) {
     event.res.statusCode = 500;
     console.log('Login failed:', error.message);

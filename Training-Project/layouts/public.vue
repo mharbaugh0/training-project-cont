@@ -6,16 +6,43 @@
             <nav class="hidden md:flex md:space-x-4 lg:space-x-6">
                 <nuxt-link to="/register">Register</nuxt-link>
                 <nuxt-link to="/login">Login</nuxt-link>
+                <div class="flex items-center justify-end flex-shrink-0 space-x-2">
+                  <UButton block
+                    :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+                    variant="ghost"
+                    aria-label="Theme"
+                    @click="isDark = !isDark"
+                    class="theme-button"
+                  />
+                </div>
             </nav>
         </div>
     </header>
+    <UDivider :avatar="{ src: 'https://avatars.githubusercontent.com/u/9009142?s=200&v=4' }" />
+
   </div>
     <div>
       <ClientOnly>
         <NuxtPage />
       </ClientOnly>
-    </div>
-</template>
+     </div>
+
+
+  </template>
+
+  <script setup lang="ts">
+  const colorMode = useColorMode();
+  const isDark = computed({
+    get() {
+      return colorMode.value === 'dark';
+    },
+    set() {
+      colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
+    }
+  });
+  </script>
+
+
 
 <style>
 nav {
@@ -41,4 +68,12 @@ header {
   padding: 20px;
 }
 
+.theme-button {
+  background-color: transparent !important; 
+  border: none; 
+}
+
+.theme-button:hover {
+  background-color: rgba(255, 255, 255, 0.1); 
+}
 </style>
