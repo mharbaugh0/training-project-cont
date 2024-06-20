@@ -3,7 +3,7 @@
 
   
   <div>
-    <h1>Please enter...</h1>
+    <h1 class="pb-2">Please enter...</h1>
     <form @submit.prevent="register"> <!--Register form-->
       <div>
         <UFormGroup label="Name" required>
@@ -71,3 +71,15 @@ const register = async () => {
   }
 };
 </script>
+
+<style>
+div {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+button {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+</style>
