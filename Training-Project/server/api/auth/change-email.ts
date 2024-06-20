@@ -1,5 +1,4 @@
 import { defineEventHandler, readBody, parseCookies } from 'h3';
-import bcrypt from 'bcrypt';
 import prisma from '../../../database/db';
 
 export default defineEventHandler(async (event) => {
@@ -13,24 +12,24 @@ export default defineEventHandler(async (event) => {
 
     const body = await readBody(event);
 
-    const { currentPassword, newPassword, confirmedNewPassword } = body;
+    const { currentEmail, newEmail, confirmedNewEmail } = body;
 
     // Validate presence of all required fields
-    if (!currentPassword || !newPassword || !confirmedNewPassword) {
+    if (!currentEmail || !newEmail || !confirmedNewEmail) {
         event.res.statusCode = 400;
         console.log('Missing fields');
         return { message: 'Missing fields' };
     }
 
-    // Check if newPassword and confirmedNewPassword match
-    if (newPassword !== confirmedNewPassword) {
+    // Check if newEmail and confirmedNewEmail match
+    if (newEmail !== confirmedNewEmail) {
         event.res.statusCode = 400;
-        console.log('Passwords do not match');
-        return ('Passwords do not match' );
+        console.log('Emails do not match');
+        return ('Emails do not match');
     }
 
     try {
-        //Parse the cookies from the request headers
+        // Parse the cookies from the request headers
         const cookies = parseCookies(event);
         const userId = Number(cookies.id); // Convert cookie ID to number
 
@@ -44,26 +43,23 @@ export default defineEventHandler(async (event) => {
             return { message: 'Invalid user' };
         }
 
-        // Verify current password with the hashed password stored in the database
-        const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
+        // Compare currentEmail with the email stored in the database
+        const isEmailValid = currentEmail === user.email;        
 
-        if (!isPasswordValid) {
+        if (!isEmailValid) {
             event.res.statusCode = 401;
-            return ('Invalid password');
+            return ('Invalid Email');
         }
 
-        // Hash the new password
-        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-
-        // Update user's password in the database
+        // Update user's email in the database
         await prisma.user.update({
             where: { id: userId },
-            data: { password: hashedNewPassword },
+            data: { email: confirmedNewEmail },
         });
 
-        return { message: 'Password changed successfully' };
+        return { message: 'Email changed successfully' };
     } catch (error: any) {
         event.res.statusCode = 500;
-        return { message: 'Password change failed', error: error.message };
+        return { message: 'Email change failed', error: error.message };
     }
 });

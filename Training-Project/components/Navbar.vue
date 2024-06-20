@@ -12,7 +12,7 @@
                     @click="isDark = !isDark"
                     class="theme-button"
                   />
-                </li>
+        </li>
       </ul>
       
     </nav>
