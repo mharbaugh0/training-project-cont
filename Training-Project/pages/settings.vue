@@ -3,28 +3,28 @@
 <template>
   <div>
   <UTabs :items="items" class="w-full"> 
-    <template #Name="{ item }"> <!--Display Name settings form, Display Name tab-->
-      <UCard @submit.prevent="onSubmitName">
-        <template #header>
-          <p class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-            {{ item.label }}
-          </p>
-          <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Change your display name here. Click save when you're done to save your changes.
-          </p>
-        </template>
+    <template #Name="{ item }">
+        <UCard @submit.prevent="onSubmitName">
+          <template #header>
+            <p class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              {{ item.label }}
+            </p>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              Change your display name here. Click save when you're done to save your changes.
+            </p>
+          </template>
 
-        <UFormGroup label="Display Name" name="name" class="mb-3">
-          <UInput :placeholder="nameForm.name ?? ''" />
-        </UFormGroup>
+          <UFormGroup label="Display Name" name="newName" class="mb-3">
+            <UInput v-model="nameForm.newName" :placeholder="storedName ?? ''" />
+          </UFormGroup>
 
-        <template #footer>
-          <UButton type="submit" color="black">
-            Save account
-          </UButton>
-        </template>
-      </UCard>
-    </template>
+          <template #footer>
+            <UButton type="submit" color="black">
+              Save Name
+            </UButton>
+          </template>
+        </UCard>
+      </template>
 
 
 
@@ -51,7 +51,7 @@
 
         <template #footer>
           <UButton type="submit" color="black">
-            Save account
+            Save Email
           </UButton>
           <div v-if="error" style="color: red; font-weight: bold;">{{ error }}</div>
         </template>
@@ -117,14 +117,37 @@ const error = ref<string | null>(null);
 const storedName = localStorage.getItem('name');
 
 const emailForm = reactive({currentEmail: '', newEmail: '', confirmedNewEmail:'' })
-const nameForm = reactive({ name: storedName})
+const nameForm = reactive({ newName: ''})
 const passwordForm = reactive({ currentPassword: '', newPassword: '', confirmedNewPassword: '' })
 
 
 
-function onSubmitName () {
+async function onSubmitName() {
   console.log('Submitted form:', nameForm);
+  try {
+    const token = localStorage.getItem('token'); // Ensure you're retrieving the correct token key
+    const response = await fetch('/api/auth/change-display-name', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify(nameForm),
+    });
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText);
+    }
+    const data = await response.json();
+    console.log('Response data:', data);
+    localStorage.setItem('name', data.newName); // Assuming data.newName holds the updated name
+    nameForm.newName = ''; // Reset the input field to be empty, showing the placeholder
+  } catch (err: any) {
+    console.error('An error occurred:', err.message);
+    error.value = err.message;
+  }
 }
+
 
 async function onSubmitEmail () {
   console.log('Submitted form:', emailForm);
