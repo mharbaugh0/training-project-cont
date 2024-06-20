@@ -51,6 +51,16 @@ export default defineEventHandler(async (event) => {
             return ('Invalid Email');
         }
 
+        // Check if the new email is already being used by another user
+        const emailInUse = await prisma.user.findUnique({
+            where: { email: newEmail },
+        });
+
+        if (emailInUse) {
+            event.res.statusCode = 409; // Conflict status code
+            return ('Email is already in use');
+        }
+
         // Update user's email in the database
         await prisma.user.update({
             where: { id: userId },
