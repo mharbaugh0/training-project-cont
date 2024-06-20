@@ -141,7 +141,10 @@ async function onSubmitName() {
     const data = await response.json();
     console.log('Response data:', data);
     localStorage.setItem('name', data.newName); // Assuming data.newName holds the updated name
-    nameForm.newName = ''; // Reset the input field to be empty, showing the placeholder
+
+    // Redirect to welcome page
+    await router.push('/welcome');
+
   } catch (err: any) {
     console.error('An error occurred:', err.message);
     error.value = err.message;
