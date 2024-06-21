@@ -68,7 +68,7 @@ This is the page that appears when the application is first initialized.
 - Only registered accounts can log in.
 ![Login page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/login.png)
 
-### Color Mode
+### Color Mode :moon::sunny:
 - Toggle button available on all pages in navigation bar.
 - Switches between dark mode (moon icon) and light mode (sun icon).
 
