@@ -53,9 +53,9 @@ Ensure you have the following installed:
 
 ## Features
 
-### Start-up Page
+### Landing Page
 This is the page that appears when the application is first initialized.
-![Start-up page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/startup.png)
+![Landing page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/landing.png)
 
 ### Register Page
 - Accessible via the ‘Register’ button in the navigation bar.
@@ -69,28 +69,18 @@ This is the page that appears when the application is first initialized.
 ![Login page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/login.png)
 
 ### Color Mode
-- Toggle button available on Login and Registration pages.
+- Toggle button available on all pages in navigation bar.
 - Switches between dark mode (moon icon) and light mode (sun icon).
-  ![Dark mode button](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/dark-mode-active.png)
-  ![Light mode button](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/light-mode-active.png)
 
 ### Welcome Page
-- Displays a welcome message with the user’s name (except on first login).
-- Navigation options: Home, Account, Documentation, Settings, Logout.
+- Displays a welcome message with the user’s name.
+- Navigation options: Home, Settings, Repo (opens new tab), Logout.
   ![Welcome page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/welcome.png)
 
-### Account Page
-
-#### Account Tab
-- Allows users to change their display name and email.
-- Changes are saved to the database upon clicking ‘Save account’.
-![Account page, account tab](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/account-account.png)
-
-#### Password Tab
-- Allows users to reset their password.
-- Changes are saved to the database upon clicking ‘Save changes’.
-![Account page, password tab](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/account-password.png)
-
+### Settings Page
+- Allows users to change their display name and email in respective tabs, changes are saved to the database upon clicking ‘Save account’.
+- Allows users to reset their password in respective tab, changes are saved to the database upon clicking ‘Save changes’.
+![Settings page, display name tab](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/settings.png)
 
 
 ## Acknowledgements
