@@ -85,11 +85,39 @@
           <UButton type="submit" color="black">
             Save password
           </UButton>
-          
           <div v-if="error" style="color: red; font-weight: bold;">{{ error }}</div>        
         </template>
       </UCard>
-      
+    </template>
+
+    <template #Deletion="{ item }"> <!--Deletion settings form, Deletion tab-->
+      <UCard @submit.prevent="onDeleteAccount">
+        <template #header>
+          <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+            {{ item.label }}
+          </h3>
+          <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            Delete your account here. This action is irreversible. Make sure you want to delete your account before proceeding.
+          </p>
+        </template>
+
+        <UFormGroup label="Email" name="Email" required class="mb-3">
+          <UInput v-model="deletionForm.email" type="email" required />
+        </UFormGroup>
+        <UFormGroup label="Current Password" name="password" required class="mb-3">
+          <UInput v-model="deletionForm.password" type="password" required />
+        </UFormGroup>
+        <UFormGroup label="Confirm Password" name="confirmPassword" required>
+          <UInput v-model="deletionForm.confirmedPassword" type="password" required />
+        </UFormGroup>
+
+        <template #footer>
+          <UButton type="submit" color="red">
+            Delete Account
+          </UButton>
+          <div v-if="error" style="color: red; font-weight: bold;">{{ error }}</div>        
+        </template>
+      </UCard>
     </template>
   </UTabs>
   <body class="min-h-screen bg-gradient-to-t from-green-300 to-60% opacity-40"></body>
@@ -109,6 +137,9 @@ const items = [ {
 }, {
   slot: 'password',
   label: 'Password'
+}, {
+  slot: 'Deletion',
+  label: 'Delete Account'
 }]
 
 const name = ref<string | null>(null);
@@ -119,6 +150,7 @@ const storedName = localStorage.getItem('name');
 const emailForm = reactive({currentEmail: '', newEmail: '', confirmedNewEmail:'' })
 const nameForm = reactive({ newName: ''})
 const passwordForm = reactive({ currentPassword: '', newPassword: '', confirmedNewPassword: '' })
+const deletionForm = reactive({ email: '', password: '', confirmedPassword: '' })
 
 
 
@@ -225,6 +257,41 @@ async function onSubmitPassword() {
     error.value = err.message;
   }
 }
+
+async function onDeleteAccount() {
+  try {
+    const token = localStorage.getItem('id'); // Ensure you're retrieving the correct token key
+
+    const response = await fetch('/api/auth/delete-account', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify(deletionForm), // Ensure the body is included in the DELETE request
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText);
+    }
+
+    const data = await response.json();
+    console.log('Response data:', data);
+
+    // Clear user data from local storage
+    localStorage.removeItem('token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
+    localStorage.removeItem('id');
+
+    await router.push('/login');
+  } catch (err: any) {
+    console.error('An error occurred:', err.message);
+    error.value = err.message;
+  }
+}
+
 const colorMode = useColorMode();
 const isDark = computed({
   get() {
@@ -235,8 +302,15 @@ const isDark = computed({
   }
 });
 
+//Check if the name is stored in local storage/ user is authenticated
 onMounted(() => {
-  name.value = storedName;
+  const storedName = localStorage.getItem('name');
+  if (!storedName) {
+    router.push('/login');
+  } else {
+    name.value = storedName;
+  }
 });
 </script>
+
 
