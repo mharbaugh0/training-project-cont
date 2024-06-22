@@ -78,9 +78,18 @@ This is the page that appears when the application is first initialized.
   ![Welcome page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/welcome.png)
 
 ### Settings Page
-- Allows users to change their display name and email in respective tabs, changes are saved to the database upon clicking ‘Save account’.
-- Allows users to reset their password in respective tab, changes are saved to the database upon clicking ‘Save changes’.
+# User's are able to:
+- Change their display name.
+- Change their account email.
+- Change their account password.
+- Delete their account.
 ![Settings page, display name tab](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/settings.png)
+
+![Settings page, email tab](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/settings1.png)
+
+![Settings page, password tab](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/settings2.png)
+
+![Settings page, delete account tab](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/settings3.png)
 
 
 ## Acknowledgements
