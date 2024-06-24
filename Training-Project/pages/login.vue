@@ -87,7 +87,7 @@ const login = async () => {
     localStorage.setItem('id', data.id);
 
 
-    // Inside the login function, right before the router.push call
+    // Set the firstLogin flag in localStorage
     localStorage.setItem('firstLogin', 'true');
     await router.push('/welcome');
   } catch (err: any) {
