@@ -27,14 +27,14 @@ export default defineEventHandler(async (event) => {
     if (!email || !password || !confirmedPassword) {
         event.res.statusCode = 400;
         console.log('Missing fields');
-        return { message: 'Missing fields' };
+        return ('Missing fields');
     }
 
     // Check if currentPassword and confirmedCurrentPassword match
     if (password !== confirmedPassword) {
         event.res.statusCode = 400;
         console.log('Passwords do not match');
-        return { message: 'Passwords do not match' };
+        return ('Passwords do not match');
     }
 
     try {
@@ -57,7 +57,7 @@ export default defineEventHandler(async (event) => {
 
         if (!isEmailValid) {
             event.res.statusCode = 401;
-            return { message: 'Invalid Email' };
+            return ('Invalid Email');
         }
 
         // Verify current password with the hashed password stored in the database
@@ -65,7 +65,7 @@ export default defineEventHandler(async (event) => {
 
         if (!isPasswordValid) {
             event.res.statusCode = 401;
-            return { message: 'Invalid password' };
+            return ('Invalid password');
         }
 
         // Delete user from the database

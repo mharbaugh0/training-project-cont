@@ -2,17 +2,13 @@
   <div>
     <NuxtLoadingIndicator />
     <NuxtLayout>
-      <!-- <nav>
-        <nuxt-link v-if-"!isAuthenticated" to="/register">Register</nuxt-link>
-        <nuxt-link v-if-"!isAuthenticated" to="/login">Login</nuxt-link>
-      </nav> -->
       <NuxtPage />
   </NuxtLayout>
   </div>
 </template>
 
 <style>
-
+/* 
 nav {
   display: flex;
   gap: 1rem;
@@ -30,6 +26,6 @@ nav a {
 
 nav a:hover {
   background-color: #45a049;
-}
+} */
 
 </style>
