@@ -39,14 +39,12 @@
 
 
 <script setup lang="ts">
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 definePageMeta({
         layout: 'public'
     })
-
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-
 
 /// Define the form and error refs
 const form = ref({ email: '', password: '' });
@@ -88,6 +86,9 @@ const login = async () => {
     localStorage.setItem('email', data.email);
     localStorage.setItem('id', data.id);
 
+
+    // Inside the login function, right before the router.push call
+    localStorage.setItem('firstLogin', 'true');
     await router.push('/welcome');
   } catch (err: any) {
     error.value = err.message;

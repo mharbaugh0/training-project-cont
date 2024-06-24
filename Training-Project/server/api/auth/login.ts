@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
   if (!email || !password) {
     event.res.statusCode = 400;
     console.log('Missing fields');
-    return { message: 'Missing fields' };
+    return ('Missing fields');
   }
 
   try {
@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
     if (!user) {
       event.res.statusCode = 401;
       console.log('Invalid email');
-      return { message: 'Invalid email or password' };
+      return ('Invalid email or password');
     }
 
     //The password provided in the request is compared to the hashed password stored in the database.

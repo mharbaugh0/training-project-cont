@@ -46,16 +46,23 @@
   
   <style scoped>
   nav ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  nav li {
-    display: inline;
-    margin-right: 10px;
-    margin-left: 10px;
+  list-style-type: none;
+  padding: 0;
+  display: flex; 
+  align-items: center; 
   }
 
-  
+  nav li {
+    display: flex; 
+    margin-right: 10px;
+    margin-left: 10px;
+    align-items: center; 
+    flex: 1; 
+  }
+
+  .theme-button {
+    margin: 0; 
+    padding: 0; 
+  }
   </style>
   

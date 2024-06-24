@@ -7,16 +7,17 @@
 
 <script setup lang="ts">
 
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
 definePageMeta({
         layout: 'default'
     })
 
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-
 //Define the name ref
 const name = ref<string | null>(null);
 const router = useRouter();
+
 
 //Check if the name is stored in local storage/ user is authenticated
 onMounted(() => {
@@ -26,5 +27,6 @@ onMounted(() => {
   } else {
     name.value = storedName;
   }
+
 });
 </script>

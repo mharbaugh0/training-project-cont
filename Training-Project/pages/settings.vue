@@ -3,10 +3,10 @@
 <template>
   <div>
   <UTabs :items="items" class="w-full"> 
-    <template #Name="{ item }">
-        <UCard @submit.prevent="onSubmitName">
+    <template #Name="{ item }"> <!--Display Name settings form, Display Name tab-->
+        <UCard @submit.prevent="onSubmitName" >
           <template #header>
-            <p class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+            <p class="text-base font-semibold leading- text-gray-900 dark:text-white">
               {{ item.label }}
             </p>
             <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
@@ -158,7 +158,7 @@ async function onSubmitName() {
   console.log('Submitted form:', nameForm);
   try {
     const token = localStorage.getItem('token'); // Ensure you're retrieving the correct token key
-    const response = await fetch('/api/auth/change-display-name', {
+    const response = await fetch('/api/user/change-display-name', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -190,7 +190,7 @@ async function onSubmitEmail () {
   try {
     const token = localStorage.getItem('id');
 
-    const response = await fetch('/api/auth/change-email', {
+    const response = await fetch('/api/user/change-email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -227,7 +227,7 @@ async function onSubmitPassword() {
   try {
     const token = localStorage.getItem('id');
 
-    const response = await fetch('/api/auth/change-password', {
+    const response = await fetch('/api/user/change-password', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -262,7 +262,7 @@ async function onDeleteAccount() {
   try {
     const token = localStorage.getItem('id'); // Ensure you're retrieving the correct token key
 
-    const response = await fetch('/api/auth/delete-account', {
+    const response = await fetch('/api/user/delete-account', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -291,16 +291,6 @@ async function onDeleteAccount() {
     error.value = err.message;
   }
 }
-
-const colorMode = useColorMode();
-const isDark = computed({
-  get() {
-    return colorMode.value === 'dark';
-  },
-  set() {
-    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
-  }
-});
 
 //Check if the name is stored in local storage/ user is authenticated
 onMounted(() => {

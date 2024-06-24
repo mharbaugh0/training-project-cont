@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
   //If the name, email, or password fields are missing, send a message
   if (!name || !email || !password) {
     event.res.statusCode = 400;
-    return { message: 'Missing fields' };
+    return ('Missing fields');
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);

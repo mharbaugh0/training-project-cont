@@ -71,6 +71,8 @@ header {
 .theme-button {
   background-color: transparent !important; 
   border: none; 
+  margin: 0;
+  padding: 0;
 }
 
 .theme-button:hover {

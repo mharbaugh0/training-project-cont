@@ -15,7 +15,7 @@
 <script setup>
   import { ref, onMounted, watch } from 'vue';
   import { useRoute } from 'vue-router';
-  import Navbar from '~/components/Navbar.vue';
+  import Navbar from '../components/Navbar.vue';
   
   const isAuthenticated = ref(false);
   const isPublicRoute = ref(false);
