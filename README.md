@@ -58,18 +58,21 @@ We were tasked with designing and creating a development skeleton for future Bio
 
 ### Landing Page
 This is the page that appears when the application is first initialized.
-![Landing page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/landing.png)
+
+![Landing page](readme-images/landing.png)
 
 ### Register Page
 - Accessible via the ‘Register’ button in the navigation bar.
 - Requires a valid email address for registration.
 - Users are prompted to log in after successful registration.
-![Register page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/register.png)
+
+![Register page](readme-images/register.png)
 
 ### Login Page
 - Accessible via the ‘Login’ button in the navigation bar.
 - Only registered accounts can log in.
-![Login page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/login.png)
+
+![Login page](readme-images/login.png)
 
 ### Color Mode :moon::sunny:
 - Toggle button available on all pages in navigation bar.
@@ -78,7 +81,8 @@ This is the page that appears when the application is first initialized.
 ### Welcome Page
 - Displays a welcome message with the user’s name.
 - Navigation options: Home, Settings, Repo (opens new tab), Logout.
-  ![Welcome page](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/welcome.png)
+
+  ![Welcome page](readme-images/welcome.png)
 
 ### Settings Page
 # User's are able to:
@@ -86,13 +90,14 @@ This is the page that appears when the application is first initialized.
 - Change their account email.
 - Change their account password.
 - Delete their account.
-![Settings page, display name tab](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/settings.png)
 
-![Settings page, email tab](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/settings1.png)
+![Settings page, display name tab](readme-images/settings.png)
 
-![Settings page, password tab](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/settings2.png)
+![Settings page, email tab](readme-images/settings1.png)
 
-![Settings page, delete account tab](https://github.com/bioneos/training-project/blob/devel/Training-Project/README%20images/settings3.png)
+![Settings page, password tab](readme-images/settings2.png)
+
+![Settings page, delete account tab](readme-images/settings3.png)
 
 
 ## Acknowledgements
