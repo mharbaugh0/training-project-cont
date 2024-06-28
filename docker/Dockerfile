@@ -9,16 +9,15 @@ RUN apt-get update && apt-get install -y openssl
 
 # Install app dependencies
 COPY package.json package-lock.json ./
-RUN npm install
 
-# Bundle app source
-COPY . .
+# Copy the entrypoint script
+COPY docker/entrypoint.sh /app/docker/entrypoint.sh
 
-# Make the entrypoint script
-RUN chmod +x /app/entrypoint.sh 
+# Make the entrypoint script executable
+RUN chmod +x /app/docker/entrypoint.sh
 
 # Expose the port Nuxt will run on
 EXPOSE 3000
 
 # Use custom entrypoint script
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./docker/entrypoint.sh"]

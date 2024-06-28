@@ -1,5 +1,8 @@
 #!/bin/sh
 
+#Install Dependencies
+RUN npm install
+
 # Run Prisma migrations
 npx prisma migrate dev
 
