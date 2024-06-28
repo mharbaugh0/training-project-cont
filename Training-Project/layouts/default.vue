@@ -61,7 +61,7 @@ li {
   padding: 1px;
 }
 
+button {
+  align-self: center;
+}
 </style>
-  
- 
-  

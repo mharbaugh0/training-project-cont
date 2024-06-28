@@ -17,19 +17,24 @@
 
         <UDivider label="OR" orientation="vertical" />
 
-        <div class="space-y-4 flex flex-col justify-center">
+        <div class="space-y-4 flex flex-col justify-center pr-40">
+          <UAlert
+            icon="i-heroicons-command-line"
+            description="These functions are temporarily unavailable."
+            title="We're sorry!"
+          />
           <ULink
             to="https://github.com/login"
             active-class="text-primary"
             inactive-class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
-            <UButton variant="outline" color="black" label="Login with GitHub" icon="i-logos-github-icon" block />
+            <UButton disabled variant="outline" color="black" label="Login with GitHub" icon="i-logos-github-icon" block />
           </ULink>
 
           <ULink
             to="https://accounts.google.com"
             active-class="text-primary"
             inactive-class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
-            <UButton variant="outline" color="black" label="Login with Google" icon="i-simple-icons-google" block />
+            <UButton disabled variant="outline" color="black" label="Login with Google" icon="i-simple-icons-google" block />
           </ULink>
         </div>
       </UCard>
@@ -95,3 +100,10 @@ const login = async () => {
   }
 };
 </script>
+
+<style>
+button {
+  margin-left: 0px;
+}
+</style>
+
