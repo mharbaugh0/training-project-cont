@@ -16,13 +16,18 @@
         </UFormGroup>
       </div>
       <div>
-        <UFormGroup label="Password" required>
+        <UFormGroup label="Password" name="password" required>
           <UInput v-model="form.password" type="password" icon="i-heroicons-lock-closed" />
+        </UFormGroup>
+      </div>
+      <div>
+        <UFormGroup label="Confirm Password" name="confirmPassword" required>
+          <UInput v-model="form.confirmPassword" type="password" icon="i-heroicons-lock-closed" />
         </UFormGroup>
       </div>
       <UButton variant="soft" type="submit">Register</UButton>
     </form>
-    <p v-if="error">{{ error }}</p>
+    <div v-if="error" style="color: red; font-weight: bold;">{{ error }}</div>        
   </div>
 </template>
 
@@ -38,7 +43,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 //Define the form and error variables
-const form = ref({ name: '', email: '', password: '' });
+const form = ref({ name: '', email: '', password: '', confirmPassword: ''});
 const error = ref<string | null>(null);
 const router = useRouter();
 
