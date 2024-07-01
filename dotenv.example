@@ -1,0 +1,24 @@
+# Database container credentials (Username required, Password not used)
+# The username for the database container (e.g., root_user)
+DATABASE_CONTAINER_USERNAME=
+
+# MySQL database credentials (All required)
+# The root password for MySQL (ensure it is secure)
+# Illegal special characters (Don't use these): 
+MYSQL_ROOT_PASSWORD=
+
+# The name of the MySQL database to create/use
+MYSQL_DATABASE=
+
+# JSON Web Token secret (Required)
+# A secret key used for generating JSON Web Tokens for authentication
+JWT_SECRET=
+
+# Note:
+# 1. The DATABASE_CONTAINER_NAME should match the service name defined in docker-compose.yml.
+# 2. The JSON Web Token (JWT_SECRET) is used for authentication and should be a secure, secret key.
+# 3. Avoid using single-digit numbers for database credentials to prevent syntax errors.
+#    Use meaningful, descriptive names instead.
+# 4. Ensure DATABASE_CONTAINER_USERNAME, DATABASE_NAME, MYSQL_ROOT_PASSWORD and MYSQL_DATABASE are correctly set
+#    and match the corresponding values in your application configuration.
+# 5. The DATABASE_CONTAINER_NAME is set to "db" to match the service name defined in your docker-compose.yml.
