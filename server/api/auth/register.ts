@@ -12,13 +12,20 @@ export default defineEventHandler(async (event) => {
 
   //Reading the body of the request and splitting it into name, email, and password
   const body = await readBody(event);
-  const { name, email, password } = body;
+  const { name, email, password, confirmPassword } = body;
 
   //If the name, email, or password fields are missing, send a message
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !confirmPassword) {
     event.res.statusCode = 400;
     return ('Missing fields');
   }
+
+  // Check if the password and password confirmation match
+  if (password !== confirmPassword) {
+    event.res.statusCode = 400;
+    console.log('Passwords do not match');
+    return ('Passwords do not match');
+}
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
