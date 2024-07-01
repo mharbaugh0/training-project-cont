@@ -4,7 +4,7 @@ DATABASE_CONTAINER_USERNAME=
 
 # MySQL database credentials (All required)
 # The root password for MySQL (ensure it is secure)
-# Illegal special characters (Don't use these): ` ' " ; & | $ % \ < > ( ) * ? [ ] { } 
+# Illegal special characters (Don't use these): @ ` ' " ; & | $ % \ / < > ( ) * ? [ ] { } 
 MYSQL_ROOT_PASSWORD=
 
 # The name of the MySQL database to create/use
