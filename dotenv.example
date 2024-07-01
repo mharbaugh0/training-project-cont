@@ -21,4 +21,3 @@ JWT_SECRET=
 #    Use meaningful, descriptive names instead.
 # 4. Ensure DATABASE_CONTAINER_USERNAME, DATABASE_NAME, MYSQL_ROOT_PASSWORD and MYSQL_DATABASE are correctly set
 #    and match the corresponding values in your application configuration.
-# 5. The DATABASE_CONTAINER_NAME is set to "db" to match the service name defined in your docker-compose.yml.
