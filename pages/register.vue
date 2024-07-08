@@ -1,22 +1,19 @@
 <template>
-
-
-  
   <div>
     <h1 class="pb-2">Please enter...</h1>
     <form @submit.prevent="register"> <!--Register form-->
       <div>
-        <UFormGroup label="Name" required>
-          <UInput v-model="form.name" type="text" icon="i-heroicons-lock-closed" />
+        <UFormGroup label="Name" required class="pb-1" >
+          <UInput v-model="form.name" type="text" icon="i-heroicons-lock-closed"/>
         </UFormGroup>
       </div>
       <div>
-        <UFormGroup label="Email" required>
+        <UFormGroup label="Email" required class="pb-1">
           <UInput v-model="form.email" type="email" icon="i-heroicons-envelope" placeholder="you@example.com" />
         </UFormGroup>
       </div>
       <div>
-        <UFormGroup label="Password" name="password" required>
+        <UFormGroup label="Password" name="password" required class="pb-1"> 
           <UInput v-model="form.password" type="password" icon="i-heroicons-lock-closed" />
         </UFormGroup>
       </div>
@@ -30,7 +27,6 @@
     <div v-if="error" style="color: red; font-weight: bold;">{{ error }}</div>        
   </div>
 </template>
-
 
 
 <script setup lang="ts">

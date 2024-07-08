@@ -9,3 +9,5 @@
           layout: 'public'
       })
 </script>
+
+<!--Style check completed-->
