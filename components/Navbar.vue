@@ -1,6 +1,6 @@
 <template>
     <nav>
-      <ul class="flex items-center rounded-full h-12 border-dotted border-2 border-gray-500 justify-between">
+      <ul class="flex items-center rounded-full h-14 border-dotted border-2 border-gray-500 justify-between">
         <li><a href="/welcome" @click.prevent="navigate('/welcome')">Home</a></li>
         <li><a href="/settings" @click.prevent="navigate('/settings')">Settings</a></li>
         <li><a href="https://github.com/bioneos/training-project/tree/main" target="_blank">Repo</a></li>
