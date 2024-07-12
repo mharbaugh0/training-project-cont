@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="pb-2">Please enter...</h1>
+    <h1 class="font-default pb-2">Please enter...</h1>
     <form @submit.prevent="register"> <!--Register form-->
       <div>
         <UFormGroup label="Name" required class="pb-1" >

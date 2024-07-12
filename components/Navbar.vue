@@ -47,7 +47,7 @@
   <style scoped>
   nav ul {
   list-style-type: none;
-  padding: 0;
+  padding: 0px;
   display: flex; 
   align-items: center; 
   }
@@ -57,7 +57,7 @@
     margin-right: 10px;
     margin-left: 10px;
     align-items: center; 
-    flex: 1; 
+    flex: 1px; 
   }
 
   .theme-button {
