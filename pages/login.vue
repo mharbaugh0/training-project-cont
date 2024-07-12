@@ -17,7 +17,7 @@
 
         <UDivider label="OR" orientation="vertical" />
 
-        <div class="space-y-4 flex flex-col justify-center pr-40">
+        <div class="space-y-4 flex flex-col justify-center pr-40 text-primary">
           <UAlert
             icon="i-heroicons-command-line"
             description="These functions are temporarily unavailable."

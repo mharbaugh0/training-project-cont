@@ -7,7 +7,7 @@
             <p class="text-base font-semibold leading- text-gray-900 dark:text-white">
               {{ item.label }}
             </p>
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            <p class="mb-5 text-sm text-gray-500 dark:text-gray-400">
               Change your display name here. Click save when you're done to save your changes.
             </p>
           </template>
@@ -118,7 +118,7 @@
       </UCard>
     </template>
   </UTabs>
-  <body class="min-h-screen bg-gradient-to-t from-green-300 to-60% opacity-40"></body>
+  <body class="min-h-screen bg-gradient-to-t from-green-300 to-50% opacity-55"></body>
 </div>
 </template> 
 
@@ -310,4 +310,3 @@ onMounted(() => {
   }
 });
 </script>
-

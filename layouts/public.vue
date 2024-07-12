@@ -47,7 +47,6 @@
 <style>
 nav {
   display: flex;
-  gap: 1rem;
   justify-content: center;
   align-content: center;
 }
@@ -65,18 +64,14 @@ nav a:hover {
 }
 
 header {
-  padding: 20px;
+  padding: 15px;
 }
 
 .theme-button {
   background-color: transparent !important; 
   border: none; 
-  margin: 0;
-  padding: 0;
-}
-
-.theme-button:hover {
-  background-color: rgba(255, 255, 255, 0.1); 
+  margin: 0px;
+  padding: 0px;
 }
 
 button {
