@@ -48,12 +48,12 @@
   </script>
 
 <style>
-header {
+
+header { 
   padding: 15px;
 }
 
 ul {
-  margin: 20;
   padding: 20px;
 }
 
