@@ -20,6 +20,7 @@
             <UButton type="submit" color="black">
               Save Name
             </UButton>
+            <div v-if="nameError" style="color: red; font-weight: bold;">{{ nameError }}</div>
           </template>
         </UCard>
       </template>
@@ -51,7 +52,7 @@
           <UButton type="submit" color="black">
             Save Email
           </UButton>
-          <div v-if="error" style="color: red; font-weight: bold;">{{ error }}</div>
+          <div v-if="emailError" style="color: red; font-weight: bold;">{{ emailError }}</div>
         </template>
       </UCard>
     </template>
@@ -83,7 +84,7 @@
           <UButton type="submit" color="black">
             Save password
           </UButton>
-          <div v-if="error" style="color: red; font-weight: bold;">{{ error }}</div>        
+          <div v-if="passwordError" style="color: red; font-weight: bold;">{{ passwordError }}</div>
         </template>
       </UCard>
     </template>
@@ -113,7 +114,7 @@
           <UButton type="submit" color="red">
             Delete Account
           </UButton>
-          <div v-if="error" style="color: red; font-weight: bold;">{{ error }}</div>        
+          <div v-if="deletionError" style="color: red; font-weight: bold;">{{ deletionError }}</div>
         </template>
       </UCard>
     </template>
@@ -145,19 +146,25 @@ const router = useRouter();
 const error = ref<string | null>(null);
 const storedName = localStorage.getItem('name');
 
+//Form variables
 const emailForm = reactive({currentEmail: '', newEmail: '', confirmedNewEmail:'' })
 const nameForm = reactive({ newName: ''})
 const passwordForm = reactive({ currentPassword: '', newPassword: '', confirmedNewPassword: '' })
 const deletionForm = reactive({ email: '', password: '', confirmedPassword: '' })
 
-async function onSubmitName() {
+//Error variables
+const emailError = ref<string | null>(null);
+const nameError = ref<string | null>(null);
+const passwordError = ref<string | null>(null);
+const deletionError = ref<string | null>(null);
 
+async function onSubmitName() {
   console.log('Submitted form:', nameForm);
 
   try {
     const token = localStorage.getItem('token'); // Ensure you're retrieving the correct token key
-    const response = await fetch('/api/user/change-display-name', {
-      method: 'POST',
+    const response = await fetch('/api/user', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
@@ -172,23 +179,27 @@ async function onSubmitName() {
     console.log('Response data:', data);
     localStorage.setItem('name', data.newName); // Assuming data.newName holds the updated name
 
+    // Clear the error message for the "Name" tab
+    nameError.value = null;
+
     // Redirect to welcome page
     await router.push('/welcome');
 
   } catch (err: any) {
     console.error('An error occurred:', err.message);
-    error.value = err.message;
+    // Set the error message for the "Name" tab only
+    nameError.value = err.message;
   }
 }
 
-async function onSubmitEmail () {
+async function onSubmitEmail() {
   console.log('Submitted form:', emailForm);
 
   try {
     const token = localStorage.getItem('id');
 
-    const response = await fetch('/api/user/change-email', {
-      method: 'POST',
+    const response = await fetch('/api/user', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
@@ -210,11 +221,14 @@ async function onSubmitEmail () {
     localStorage.removeItem('email');
     localStorage.removeItem('id');
 
+    // Clear the error message for the "Email" tab
+    emailError.value = null;
+
     // Redirect to login page
     await router.push('/login');
+
   } catch (err: any) {
-    // console.error('An error occurred:', error);
-    error.value = err.message;
+    emailError.value = err.message;
   }
 }
 
@@ -224,8 +238,8 @@ async function onSubmitPassword() {
   try {
     const token = localStorage.getItem('id');
 
-    const response = await fetch('/api/user/change-password', {
-      method: 'POST',
+    const response = await fetch('/api/user', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
@@ -247,11 +261,14 @@ async function onSubmitPassword() {
     localStorage.removeItem('email');
     localStorage.removeItem('id');
 
+    // Clear the error message for the "Password" tab
+    passwordError.value = null;
+
     // Redirect to login page
     await router.push('/login');
+
   } catch (err: any) {
-    // console.error('An error occurred:', error);
-    error.value = err.message;
+    passwordError.value = err.message;
   }
 }
 
@@ -259,7 +276,7 @@ async function onDeleteAccount() {
   try {
     const token = localStorage.getItem('id'); // Ensure you're retrieving the correct token key
 
-    const response = await fetch('/api/user/delete-account', {
+    const response = await fetch('/api/user', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -282,25 +299,27 @@ async function onDeleteAccount() {
     localStorage.removeItem('email');
     localStorage.removeItem('id');
 
+    // Clear the error message for the "Delete Account" tab
+    deletionError.value = null;
+
     await router.push('/login');
   } catch (err: any) {
-    console.error('An error occurred:', err.message);
-    error.value = err.message;
+    deletionError.value = err.message;
   }
 }
 
 //Check if the name is stored in local storage/ user is authenticated
 onMounted(() => {
 
-  // // Check if this is the first visit after login
-  // const firstLogin = localStorage.getItem('firstLogin');
-  // if (firstLogin) {
-  //   // Clear the flag to prevent future reloads
-  //   localStorage.removeItem('firstLogin');
+  // Check if this is the first visit after login
+  const firstLogin = localStorage.getItem('firstLogin');
+  if (firstLogin) {
+    // Clear the flag to prevent future reloads
+    localStorage.removeItem('firstLogin');
     
-  //   // Reload the page
-  //   window.location.reload();
-  // }
+    // Reload the page
+    window.location.reload();
+  }
 
   const storedName = localStorage.getItem('name');
   if (!storedName) {
