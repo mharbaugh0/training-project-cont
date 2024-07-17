@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     //Check if the request method is DELETE
     if (event.req.method !== 'DELETE') {
         event.res.statusCode = 405;
-        console.log('Method not allowed');
+        console.log(event.res.statusCode + ':' + 'Method not allowed');
         return { message: 'Method not allowed' };
     }
 

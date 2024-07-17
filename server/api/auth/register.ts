@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
   // Check if the password and password confirmation match
   if (password !== confirmPassword) {
     event.res.statusCode = 400;
-    console.log('Passwords do not match');
+    console.log(event.res.statusCode + ':' + 'Passwords do not match');
     return ('Passwords do not match');
 }
 
@@ -40,12 +40,13 @@ export default defineEventHandler(async (event) => {
     });
     //If the user is created successfully, send a status code of 201
     event.res.statusCode = 201;
+    console.log(event.res.statusCode + ':' + 'User created successfully');
     return { user };
-    console.log('User created successfully');
 
     //If the user creation fails, send a status code of 500 and an error message
   } catch (error: any) {
     event.res.statusCode = 500;
+    console.log(event.res.statusCode + ':' + 'User creation failed')
     return { message: 'User creation failed', error: error.message };
   }
 });

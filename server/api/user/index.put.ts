@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
     
         if (event.req.method !== 'PUT') {
             event.res.statusCode = 405;
-            console.log('Method not allowed');
+            console.log(event.res.statusCode + ':' + 'Method not allowed');
             return { message: 'Method not allowed' };
         }
 
@@ -21,5 +21,9 @@ export default defineEventHandler(async (event) => {
         } else {
             event.res.statusCode = 400;
         }
+
     
+
 });
+
+
