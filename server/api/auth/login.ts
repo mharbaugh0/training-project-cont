@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
 
   if (event.req.method !== 'POST') {
     event.res.statusCode = 405;
-    console.log('Method not allowed');
+    console.log(event.res.statusCode + ':' + 'Method not allowed');
     return { message: 'Method not allowed' };
   }
 
@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
 
   if (!email || !password) {
     event.res.statusCode = 400;
-    console.log('Missing fields');
+    console.log(event.res.statusCode + ':' + 'Missing fields');
     return ('Missing fields');
   }
 
@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
 
     if (!user) {
       event.res.statusCode = 401;
-      console.log('Invalid email');
+      console.log(event.res.statusCode + ':' + 'Invalid email');
       return ('Invalid email or password');
     }
 
@@ -46,7 +46,7 @@ export default defineEventHandler(async (event) => {
 
     if (!isPasswordValid) {
       event.res.statusCode = 401;
-      console.log('Invalid password');
+      console.log(event.res.statusCode + ':' + 'Invalid password');
 
       return ('Invalid Password');
     }
@@ -58,7 +58,7 @@ export default defineEventHandler(async (event) => {
     return { token, name: user.name, email: user.email, id: user.id};
   } catch (error: any) {
     event.res.statusCode = 500;
-    console.log('Login failed:', error.message);
+    console.log(event.res.statusCode + ':' + 'Login failed:', error.message);
     return { message: 'Login failed', error: error.message };
   }
 });
