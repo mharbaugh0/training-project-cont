@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mr-4">
   <UTabs :items="items" class="w-full"> 
     <template #Name="{ item }"> <!--Display Name settings form, Display Name tab-->
         <UCard @submit.prevent="onSubmitName" >
@@ -318,7 +318,7 @@ onMounted(() => {
     localStorage.removeItem('firstLogin');
     
     // Reload the page
-    window.location.reload();
+    //window.location.reload();
   }
 
   const storedName = localStorage.getItem('name');
@@ -329,3 +329,28 @@ onMounted(() => {
   }
 });
 </script>
+
+<style>
+
+div {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+[role=tab] {
+  visibility: visible;
+}
+
+.dark\:bg-gray-900:is(.dark *) {
+  background-color: transparent;
+}
+
+.dark\:bg-gray-900:is(.light *) {
+  background-color: transparent;
+}
+
+*, ::before, ::after {
+  box-sizing:inherit;
+}
+
+</style>
