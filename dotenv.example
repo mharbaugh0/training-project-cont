@@ -1,5 +1,6 @@
 # Database container credentials (Username required, Password not used)
 # The username for the database container (e.g., root_user)
+# Used to connect to the database directly 
 DATABASE_CONTAINER_USERNAME=
 
 # MySQL database credentials (All required)

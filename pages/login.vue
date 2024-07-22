@@ -4,11 +4,11 @@
       <UCard :ui="{ body: { base: 'grid grid-cols-3' } }">
         <div class="space-y-4">
           <UFormGroup label="Email" required>
-            <UInput v-model="form.email" type="email" placeholder="you@example.com" icon="i-heroicons-envelope" />
+            <UInput v-model="email" type="email" placeholder="you@example.com" icon="i-heroicons-envelope" />
           </UFormGroup>
 
           <UFormGroup label="Password" required>
-            <UInput v-model="form.password" type="password" icon="i-heroicons-lock-closed" />
+            <UInput v-model="password" type="password" icon="i-heroicons-lock-closed" />
           </UFormGroup>
 
           <UButton variant="soft" type="submit">Login</UButton>
@@ -48,54 +48,39 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 definePageMeta({
-        layout: 'public'
+        layout: 'public',
+        middleware: 'not-auth'
     })
 
 /// Define the form and error refs
-const form = ref({ email: '', password: '' });
+const email = ref('');
+const password = ref('');
 const error = ref<string | null>(null);
 const router = useRouter();
 
 
-// Define the cookies
-const tokenCookie = useCookie('token');
-const nameCookie = useCookie('name');
-const emailCookie = useCookie('email');
-const idCookie = useCookie('id')
-
 const login = async () => {
   try {
-    // Send a login request to the server
-    const response = await fetch('/api/auth/login', {
+    const data = await $fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form.value)
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value,
+      }),
     });
 
-    // Handle the non-ok response
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(errorText);
+    console.log(data);
+    // console.log(data.name);
+    if (data.success) {
+      console.log('Redirecting to /welcome');
+      router.push("/welcome");
+    } else {
+      error.value = data.message;
     }
-
-    // Store token, name, id, and email in cookies and local storage
-    const data = await response.json();
-
-    tokenCookie.value = data.token;
-    nameCookie.value = data.name;
-    emailCookie.value = data.email;
-    idCookie.value = data.id;
-
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('name', data.name);
-    localStorage.setItem('email', data.email);
-    localStorage.setItem('id', data.id);
-
-    // Set the firstLogin flag in localStorage
-    localStorage.setItem('firstLogin', 'true');
-    await router.push('/welcome');
   } catch (err: any) {
     error.value = err.message;
+    console.log(error.value);
   }
 };
 </script>

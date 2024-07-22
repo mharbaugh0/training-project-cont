@@ -6,25 +6,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 definePageMeta({
-        layout: 'default'
+        layout: 'default',
+        middleware: 'auth'
     })
 
 //Define the name ref
 const name = ref<string | null>(null);
 const router = useRouter();
 
-//Check if the name is stored in local storage/ user is authenticated
-onMounted(() => {
-  const storedName = localStorage.getItem('name');
-  if (!storedName) {
-    router.push('/login');
-  } else {
-    name.value = storedName;
-  }
-
-});
 </script>
