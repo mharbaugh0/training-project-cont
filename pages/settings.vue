@@ -317,7 +317,7 @@ onMounted(() => {
     // Clear the flag to prevent future reloads
     localStorage.removeItem('firstLogin');
     
-    // Reload the page
+    // Reload the page - deprecated temporary fix for navigation styling issues
     //window.location.reload();
   }
 
