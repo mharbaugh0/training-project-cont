@@ -27,6 +27,8 @@ const me = async () => {
     body: JSON.stringify({ token }) 
   }).then((data: any) => { 
     console.log('Not-Auth Middleware: /api/auth/me response:', data);
+    // refreshCookie('token');
+    // refreshCookie('user');
     return data;
   }).catch((error) => {
     console.log('Not-Auth Middleware: Error:', error);

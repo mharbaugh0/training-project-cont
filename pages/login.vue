@@ -12,7 +12,7 @@
           </UFormGroup>
 
           <UButton variant="soft" type="submit">Login</UButton>
-          <div v-if="error" style="color: red; font-weight: bold;">{{ error }}</div>
+            <div v-if="loginError" style="color: red; font-weight: bold;">{{ loginError }}</div>
         </div>
 
         <UDivider label="OR" orientation="vertical" />
@@ -44,6 +44,7 @@
 
 
 <script setup lang="ts">
+import { use } from 'h3';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -55,7 +56,7 @@ definePageMeta({
 /// Define the form and error refs
 const email = ref('');
 const password = ref('');
-const error = ref<string | null>(null);
+const loginError = ref<string | null>(null);
 const router = useRouter();
 
 
@@ -70,17 +71,23 @@ const login = async () => {
       }),
     });
 
+    // console.log(useCookie('token'));
     console.log(data);
-    // console.log(data.name);
+    console.log(data.name);
     if (data.success) {
+
+      //Set cookies
+      useCookie('token').value = data.token;
+      useCookie('name').value = data.name;
+      useCookie('email').value = data.email;
+      useCookie('id').value = data.id.toString();
+
       console.log('Redirecting to /welcome');
       router.push("/welcome");
-    } else {
-      error.value = data.message;
-    }
-  } catch (err: any) {
-    error.value = err.message;
-    console.log(error.value);
+    } 
+  } catch (error: any) {
+    loginError.value = error.statusMessage;
+    console.log(loginError.value);
   }
 };
 </script>

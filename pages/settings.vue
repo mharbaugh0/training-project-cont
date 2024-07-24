@@ -139,8 +139,9 @@ const items = [
   { slot: 'Deletion', label: 'Delete Account' }
 ];
 
-const currentNameCookie = useCookie('name');
-const name = ref<string | null>(currentNameCookie.value);
+// const currentNameCookie = useCookie('name');
+// console.log(currentNameCookie);
+const name = ref<string | null>();
 const router = useRouter();
 
 // Form variables
@@ -155,12 +156,13 @@ const nameError = ref<string | null>(null);
 const passwordError = ref<string | null>(null);
 const deletionError = ref<string | null>(null);
 
+const token = useCookie('token') ;
+
+
 async function onSubmitName() {
   console.log('Submitted form:', nameForm);
 
   try {
-    const token = useCookie('token') ; // Ensure you're retrieving the correct token key
-    console.log(token);
     const response = await $fetch('/api/user', {
       method: 'PUT',
       headers: {
@@ -169,22 +171,18 @@ async function onSubmitName() {
       },
       body: JSON.stringify(nameForm),
     });
-    // if (!response.ok) {
-    //   const errorText = await response.text();
-    //   throw new Error(errorText);
-    // }
-    console.log(response);
-    currentNameCookie.value = nameForm.newName;
+
+    refreshCookie('name');
+    refreshCookie('token');
 
     // Clear the error message for the "Name" tab
     nameError.value = null;
 
-    // Redirect to welcome page
-    await router.push('/welcome');
-  } catch (err: any) {
-    console.error('An error occurred:', err.message);
+    await navigateTo('/login');
+
+  } catch (error: any) {
     // Set the error message for the "Name" tab only
-    nameError.value = err.message;
+    nameError.value = error.statusMessage;
   }
 }
 
@@ -192,9 +190,9 @@ async function onSubmitEmail() {
   console.log('Submitted form:', emailForm);
 
   try {
-    const token = useCookie('token') ;
+    console.log(token);
 
-    const response = await fetch('/api/user', {
+    const response = await $fetch('/api/user', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -203,23 +201,13 @@ async function onSubmitEmail() {
       body: JSON.stringify(emailForm),
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(errorText);
-    }
-
-    const data = await response.json();
-    console.log('Response data:', data);
-
-  
-
     // Clear the error message for the "Email" tab
     emailError.value = null;
 
-    // Redirect to login page
-    await router.push('/login');
-  } catch (err: any) {
-    emailError.value = err.message;
+    await navigateTo('/login');
+
+  } catch (error: any) {
+    emailError.value = error.statusMessage;
   }
 }
 
@@ -227,9 +215,8 @@ async function onSubmitPassword() {
   console.log('Submitted form:', passwordForm);
 
   try {
-    const token = localStorage.getItem('token');
 
-    const response = await fetch('/api/user', {
+    const response = await $fetch('/api/user', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -238,29 +225,18 @@ async function onSubmitPassword() {
       body: JSON.stringify(passwordForm),
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(errorText);
-    }
-
-    const data = await response.json();
-    console.log('Response data:', data);
-
-    
-
     // Clear the error message for the "Password" tab
     passwordError.value = null;
 
-    // Redirect to login page
-    await router.push('/login');
-  } catch (err: any) {
-    passwordError.value = err.message;
+    await navigateTo('/login');
+    
+  } catch (error: any) {
+    passwordError.value = error.statusMessage;
   }
 }
 
 async function onDeleteAccount() {
   try {
-    const token = localStorage.getItem('token'); // Ensure you're retrieving the correct token key
 
     const response = await fetch('/api/user', {
       method: 'DELETE',
@@ -271,26 +247,14 @@ async function onDeleteAccount() {
       body: JSON.stringify(deletionForm), // Ensure the body is included in the DELETE request
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(errorText);
-    }
-
-    const data = await response.json();
-    console.log('Response data:', data);
-
-    // Clear user data from local storage
-    localStorage.removeItem('token');
-    localStorage.removeItem('name');
-    localStorage.removeItem('email');
-    localStorage.removeItem('id');
 
     // Clear the error message for the "Delete Account" tab
     deletionError.value = null;
 
-    await router.push('/login');
-  } catch (err: any) {
-    deletionError.value = err.message;
+    await navigateTo('/login');
+
+  } catch (error: any) {
+    deletionError.value = error.statusMessage;
   }
 }
 

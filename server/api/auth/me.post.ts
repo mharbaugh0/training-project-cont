@@ -1,5 +1,6 @@
 import { checkJwtToken, createJwtToken } from "~/jwt";
 import prisma from '../../../database/db';
+import { useCookie } from "nuxt/app";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -33,6 +34,7 @@ export default defineEventHandler(async (event) => {
   // Refresh JWT token
   const newToken = await createJwtToken(user.id);
   setCookie(event, "token", newToken);
+  setCookie(event, "user", JSON.stringify(user));
 
   // Remove sensitive information like password from the user object
   const { password, ...userWithoutPassword } = user;

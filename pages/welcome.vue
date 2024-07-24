@@ -14,8 +14,13 @@ definePageMeta({
         middleware: 'auth'
     })
 
+// console.log(useCookie('name'))
+const displayName = useCookie('name').value;
+// console.log('Name:', displayName);
+
+
 //Define the name ref
-const name = ref<string | null>(null);
+const name = ref<string | null>(displayName);
 const router = useRouter();
 
 </script>

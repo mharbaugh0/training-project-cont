@@ -4,9 +4,7 @@ import { changePassword, changeEmail, changeDisplayName } from '../controllers/s
 export default defineEventHandler(async (event) => {
     
         if (event.req.method !== 'PUT') {
-            event.res.statusCode = 405;
-            console.log('Method not allowed');
-            return { message: 'Method not allowed' };
+            throw createError({ statusCode: 405, statusMessage: 'Method not allowed' });
         }
 
         const body = await readBody(event);
@@ -19,7 +17,7 @@ export default defineEventHandler(async (event) => {
         } else if ('newName' in body) {
             return changeDisplayName(event);
         } else {
-            event.res.statusCode = 400;
+            throw createError({ statusCode: 400, statusMessage: 'Invalid request' });
         }
     
 });

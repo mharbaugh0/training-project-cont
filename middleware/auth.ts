@@ -28,6 +28,9 @@ const me = async () => {
     body: JSON.stringify({ token }) 
   }).then((data: any) => { 
     console.log('Auth Middleware: /api/auth/me response:', data);
+
+    // refreshCookie('token');
+    // refreshCookie('user');
     return data;
   }).catch((error) => {
     console.log('Auth Middleware: Error:', error);
