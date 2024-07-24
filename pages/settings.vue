@@ -126,6 +126,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { consola } from "consola"
 
 const items = [ {
   slot: 'Name',
@@ -159,7 +160,7 @@ const passwordError = ref<string | null>(null);
 const deletionError = ref<string | null>(null);
 
 async function onSubmitName() {
-  console.log('Submitted form:', nameForm);
+  consola.log('Submitted form:', nameForm);
 
   try {
     const token = localStorage.getItem('token'); // Ensure you're retrieving the correct token key
@@ -176,7 +177,7 @@ async function onSubmitName() {
       throw new Error(errorText);
     }
     const data = await response.json();
-    console.log('Response data:', data);
+    consola.info('Response data:', data);
     localStorage.setItem('name', data.newName); // Assuming data.newName holds the updated name
 
     // Clear the error message for the "Name" tab
@@ -186,14 +187,14 @@ async function onSubmitName() {
     await router.push('/welcome');
 
   } catch (err: any) {
-    console.error('An error occurred:', err.message);
+    consola.error('An error occurred:', err.message);
     // Set the error message for the "Name" tab only
     nameError.value = err.message;
   }
 }
 
 async function onSubmitEmail() {
-  console.log('Submitted form:', emailForm);
+  consola.log('Submitted form:', emailForm);
 
   try {
     const token = localStorage.getItem('id');
@@ -213,7 +214,7 @@ async function onSubmitEmail() {
     }
 
     const data = await response.json();
-    console.log('Response data:', data);
+    consola.info('Response data:', data);
 
     // Clear user data from local storage
     localStorage.removeItem('token');
@@ -233,7 +234,7 @@ async function onSubmitEmail() {
 }
 
 async function onSubmitPassword() {
-  console.log('Submitted form:', passwordForm);
+  consola.log('Submitted form:', passwordForm);
 
   try {
     const token = localStorage.getItem('id');
@@ -253,7 +254,7 @@ async function onSubmitPassword() {
     }
 
     const data = await response.json();
-    console.log('Response data:', data);
+    consola.info('Response data:', data);
 
     // Clear user data from local storage
     localStorage.removeItem('token');
@@ -291,7 +292,7 @@ async function onDeleteAccount() {
     }
 
     const data = await response.json();
-    console.log('Response data:', data);
+    consola.info('Response data:', data);
 
     // Clear user data from local storage
     localStorage.removeItem('token');

@@ -20,6 +20,7 @@
   
   <script setup>
   import { useRouter } from 'vue-router';
+  import consola from 'consola';
   
   const router = useRouter();
   
