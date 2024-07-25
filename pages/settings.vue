@@ -144,12 +144,11 @@ const items = [ {
 
 const name = ref<string | null>(null);
 const router = useRouter();
-const error = ref<string | null>(null);
 const storedName = localStorage.getItem('name');
 
 //Form variables
-const emailForm = reactive({currentEmail: '', newEmail: '', confirmedNewEmail:'' })
 const nameForm = reactive({ newName: ''})
+const emailForm = reactive({currentEmail: '', newEmail: '', confirmedNewEmail:'' })
 const passwordForm = reactive({ currentPassword: '', newPassword: '', confirmedNewPassword: '' })
 const deletionForm = reactive({ email: '', password: '', confirmedPassword: '' })
 
@@ -158,6 +157,13 @@ const emailError = ref<string | null>(null);
 const nameError = ref<string | null>(null);
 const passwordError = ref<string | null>(null);
 const deletionError = ref<string | null>(null);
+
+async function clearData() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('name');
+  localStorage.removeItem('email');
+  localStorage.removeItem('id');
+}
 
 async function onSubmitName() {
   consola.log('Submitted form:', nameForm);
@@ -217,10 +223,7 @@ async function onSubmitEmail() {
     consola.info('Response data:', data);
 
     // Clear user data from local storage
-    localStorage.removeItem('token');
-    localStorage.removeItem('name');
-    localStorage.removeItem('email');
-    localStorage.removeItem('id');
+    clearData()
 
     // Clear the error message for the "Email" tab
     emailError.value = null;
@@ -257,10 +260,7 @@ async function onSubmitPassword() {
     consola.info('Response data:', data);
 
     // Clear user data from local storage
-    localStorage.removeItem('token');
-    localStorage.removeItem('name');
-    localStorage.removeItem('email');
-    localStorage.removeItem('id');
+    clearData()
 
     // Clear the error message for the "Password" tab
     passwordError.value = null;
@@ -295,10 +295,7 @@ async function onDeleteAccount() {
     consola.info('Response data:', data);
 
     // Clear user data from local storage
-    localStorage.removeItem('token');
-    localStorage.removeItem('name');
-    localStorage.removeItem('email');
-    localStorage.removeItem('id');
+    clearData()
 
     // Clear the error message for the "Delete Account" tab
     deletionError.value = null;

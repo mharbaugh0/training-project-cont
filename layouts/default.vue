@@ -42,8 +42,6 @@
   onMounted(() => {
     updateAuthState();
   });
-
-
   
   </script>
 
