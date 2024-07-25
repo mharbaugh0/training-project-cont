@@ -90,6 +90,8 @@ This is the page that appears when the application is first initialized.
 - Change their account password.
 - Delete their account.
 
+Changes are handled via API requests, handlers located in server folder
+
 ![Settings page, display name tab](readme-images/settings.png)
 
 ![Settings page, email tab](readme-images/settings1.png)
@@ -97,6 +99,7 @@ This is the page that appears when the application is first initialized.
 ![Settings page, password tab](readme-images/settings2.png)
 
 ![Settings page, delete account tab](readme-images/settings3.png)
+
 
 
 ## Acknowledgements
