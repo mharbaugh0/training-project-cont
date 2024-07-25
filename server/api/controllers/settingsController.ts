@@ -1,6 +1,7 @@
 import { readBody, parseCookies, H3Event } from 'h3';
 import bcrypt from 'bcrypt';
 import prisma from '../../../database/db';
+import { consola } from "consola"
 
 export async function changePassword(event: H3Event) { 
 
@@ -11,14 +12,14 @@ export async function changePassword(event: H3Event) {
     // Validate presence of all required fields
     if (!currentPassword || !newPassword || !confirmedNewPassword) {
         event.res.statusCode = 400;
-        console.log(event.res.statusCode + ':' + 'Missing fields');
+        consola.error(event.res.statusCode + ':' + 'Missing fields');
         return ('Missing fields');
     }
 
     // Check if newPassword and confirmedNewPassword match
     if (newPassword !== confirmedNewPassword) {
         event.res.statusCode = 400;
-        console.log(event.res.statusCode + ':' + 'Passwords do not match');
+        consola.error(event.res.statusCode + ':' + 'Passwords do not match');
         return ('Passwords do not match');
     }
 
@@ -70,14 +71,14 @@ export async function changeEmail(event: H3Event) {
     // Validate presence of all required fields
     if (!currentEmail || !newEmail || !confirmedNewEmail) {
         event.res.statusCode = 400;
-        console.log(event.res.statusCode + ':' + 'Missing fields');
+        consola.error(event.res.statusCode + ':' + 'Missing fields');
         return ('Missing fields');
     }
 
     // Check if newEmail and confirmedNewEmail match
     if (newEmail !== confirmedNewEmail) {
         event.res.statusCode = 400;
-        console.log(event.res.statusCode + ':' + 'Emails do not match');
+        consola.error(event.res.statusCode + ':' + 'Emails do not match');
         return ('Emails do not match');
     }
 
@@ -135,7 +136,7 @@ export async function changeDisplayName(event: H3Event) {
       // Validate presence of the required field
     if (!newName) {
         event.res.statusCode = 400;
-        console.log(event.res.statusCode + ':' + 'Missing fields');
+        consola.error(event.res.statusCode + ':' + 'Missing fields');
         return ('Missing fields');
     }
 
@@ -182,14 +183,14 @@ export async function deleteAccount(event: H3Event) {
     // Validate presence of all required fields
     if (!email || !password || !confirmedPassword) {
         event.res.statusCode = 400;
-        console.log(event.res.statusCode + ':' + 'Missing fields');
+        consola.error(event.res.statusCode + ':' + 'Missing fields');
         return ('Missing fields');
     }
 
     // Check if currentPassword and confirmedCurrentPassword match
     if (password !== confirmedPassword) {
         event.res.statusCode = 400;
-        console.log(event.res.statusCode + ':' + 'Passwords do not match');
+        consola.error(event.res.statusCode + ':' + 'Passwords do not match');
         return ('Passwords do not match');
     }
 
@@ -228,11 +229,11 @@ export async function deleteAccount(event: H3Event) {
         await prisma.user.delete({
             where: { id: userId },
         });
-        console.log('Account deleted, log out')
+        consola.log('Account deleted, user logged out')
         return { message: 'Account deleted successfully' };
     } catch (error: any) {
         event.res.statusCode = 500;
-        console.log(event.res.statusCode + ':' + 'Account deletion failed:', error.message);
+        consola.error(event.res.statusCode + ':' + 'Account deletion failed:', error.message);
         return { message: 'Account deletion failed', error: error.message };
     }
 

@@ -1,5 +1,6 @@
 import { defineEventHandler, readBody } from 'h3';
 import { deleteAccount } from '../controllers/settingsController';
+import { consola } from "consola"
 
 
 export default defineEventHandler(async (event) => {
@@ -7,7 +8,7 @@ export default defineEventHandler(async (event) => {
     //Check if the request method is DELETE
     if (event.req.method !== 'DELETE') {
         event.res.statusCode = 405;
-        console.log(event.res.statusCode + ':' + 'Method not allowed');
+        consola.error(event.res.statusCode + ':' + 'Method not allowed');
         return { message: 'Method not allowed' };
     }
 

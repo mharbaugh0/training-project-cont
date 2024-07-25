@@ -126,6 +126,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { consola } from "consola"
 
 const items = [ {
   slot: 'Name',
@@ -143,12 +144,11 @@ const items = [ {
 
 const name = ref<string | null>(null);
 const router = useRouter();
-const error = ref<string | null>(null);
 const storedName = localStorage.getItem('name');
 
 //Form variables
-const emailForm = reactive({currentEmail: '', newEmail: '', confirmedNewEmail:'' })
 const nameForm = reactive({ newName: ''})
+const emailForm = reactive({currentEmail: '', newEmail: '', confirmedNewEmail:'' })
 const passwordForm = reactive({ currentPassword: '', newPassword: '', confirmedNewPassword: '' })
 const deletionForm = reactive({ email: '', password: '', confirmedPassword: '' })
 
@@ -158,8 +158,15 @@ const nameError = ref<string | null>(null);
 const passwordError = ref<string | null>(null);
 const deletionError = ref<string | null>(null);
 
+async function clearData() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('name');
+  localStorage.removeItem('email');
+  localStorage.removeItem('id');
+}
+
 async function onSubmitName() {
-  console.log('Submitted form:', nameForm);
+  consola.log('Submitted form:', nameForm);
 
   try {
     const token = localStorage.getItem('token'); // Ensure you're retrieving the correct token key
@@ -176,7 +183,7 @@ async function onSubmitName() {
       throw new Error(errorText);
     }
     const data = await response.json();
-    console.log('Response data:', data);
+    consola.info('Response data:', data);
     localStorage.setItem('name', data.newName); // Assuming data.newName holds the updated name
 
     // Clear the error message for the "Name" tab
@@ -186,14 +193,14 @@ async function onSubmitName() {
     await router.push('/welcome');
 
   } catch (err: any) {
-    console.error('An error occurred:', err.message);
+    consola.error('An error occurred:', err.message);
     // Set the error message for the "Name" tab only
     nameError.value = err.message;
   }
 }
 
 async function onSubmitEmail() {
-  console.log('Submitted form:', emailForm);
+  consola.log('Submitted form:', emailForm);
 
   try {
     const token = localStorage.getItem('id');
@@ -213,13 +220,10 @@ async function onSubmitEmail() {
     }
 
     const data = await response.json();
-    console.log('Response data:', data);
+    consola.info('Response data:', data);
 
     // Clear user data from local storage
-    localStorage.removeItem('token');
-    localStorage.removeItem('name');
-    localStorage.removeItem('email');
-    localStorage.removeItem('id');
+    clearData()
 
     // Clear the error message for the "Email" tab
     emailError.value = null;
@@ -233,7 +237,7 @@ async function onSubmitEmail() {
 }
 
 async function onSubmitPassword() {
-  console.log('Submitted form:', passwordForm);
+  consola.log('Submitted form:', passwordForm);
 
   try {
     const token = localStorage.getItem('id');
@@ -253,13 +257,10 @@ async function onSubmitPassword() {
     }
 
     const data = await response.json();
-    console.log('Response data:', data);
+    consola.info('Response data:', data);
 
     // Clear user data from local storage
-    localStorage.removeItem('token');
-    localStorage.removeItem('name');
-    localStorage.removeItem('email');
-    localStorage.removeItem('id');
+    clearData()
 
     // Clear the error message for the "Password" tab
     passwordError.value = null;
@@ -291,13 +292,10 @@ async function onDeleteAccount() {
     }
 
     const data = await response.json();
-    console.log('Response data:', data);
+    consola.info('Response data:', data);
 
     // Clear user data from local storage
-    localStorage.removeItem('token');
-    localStorage.removeItem('name');
-    localStorage.removeItem('email');
-    localStorage.removeItem('id');
+    clearData()
 
     // Clear the error message for the "Delete Account" tab
     deletionError.value = null;

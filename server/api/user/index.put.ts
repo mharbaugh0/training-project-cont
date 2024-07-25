@@ -1,11 +1,12 @@
 import { defineEventHandler, readBody } from 'h3';
 import { changePassword, changeEmail, changeDisplayName } from '../controllers/settingsController';
+import { consola } from "consola"
 
 export default defineEventHandler(async (event) => {
     
         if (event.req.method !== 'PUT') {
             event.res.statusCode = 405;
-            console.log(event.res.statusCode + ':' + 'Method not allowed');
+            consola.error(event.res.statusCode + ':' + 'Method not allowed');
             return { message: 'Method not allowed' };
         }
 

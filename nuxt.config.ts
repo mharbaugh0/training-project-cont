@@ -11,5 +11,6 @@ export default defineNuxtConfig({
     jwtSecret: process.env.JWT_SECRET,
   },
   
+  
 
 });

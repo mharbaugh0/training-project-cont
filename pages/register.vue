@@ -37,13 +37,12 @@ definePageMeta({
 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { consola } from "consola"
 
 //Define the form and error variables
 const form = ref({ name: '', email: '', password: '', confirmPassword: ''});
 const error = ref<string | null>(null);
 const router = useRouter();
-
-
 
 const register = async () => {
   try {
@@ -65,7 +64,7 @@ const register = async () => {
     localStorage.setItem('name', data.name);
     localStorage.setItem('email', data.email)
     localStorage.setItem('id', data.id)
-    console.log(data)
+    consola.info(data)
     await router.push('/login');
   } catch (err: any) {
     error.value = err.message;
