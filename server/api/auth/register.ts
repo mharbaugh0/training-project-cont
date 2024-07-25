@@ -48,6 +48,6 @@ export default defineEventHandler(async (event) => {
   } catch (error: any) {
     event.res.statusCode = 500;
     consola.error(event.res.statusCode + ':' + 'User creation failed')
-    return { message: 'User creation failed', error: error.message };
+    return ('User creation failed, please alter credentials and try again');
   }
 });
