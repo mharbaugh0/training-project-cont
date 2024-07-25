@@ -1,6 +1,6 @@
 import { readBody, parseCookies, H3Event } from 'h3';
 import bcrypt from 'bcrypt';
-import prisma from '../../../database/db';
+import prisma from '../../database/db';
 import { createJwtToken } from '~/jwt';
 
 export async function changeDisplayName(event: H3Event) {
@@ -93,62 +93,11 @@ export async function changeEmail(event: H3Event) {
 
     return { message: 'Email changed successfully',
             success: false
-     };
+    }
     
 };
 
-export async function changePassword(event: H3Event) { 
 
-    const body = await readBody(event);
-
-    const { currentPassword, newPassword, confirmedNewPassword } = body;
-
-    // Validate presence of all required fields
-    if (!currentPassword || !newPassword || !confirmedNewPassword) {
-        throw createError({statusCode: 400, statusMessage:'Missing fields'});
-    }
-
-    // Check if newPassword and confirmedNewPassword match
-    if (newPassword !== confirmedNewPassword) {
-        throw createError({statusCode: 400, statusMessage:'Passwords do not match'});
-    }
-
-    //Parse the cookies from the request headers
-    const cookies = parseCookies(event);
-    console.log(cookies);
-    const userId = Number(cookies.id); // Convert cookie ID to number
-
-    const user = await prisma.user.findUnique({
-        where: { id: userId },
-    });
-
-    // Check if user exists
-    if (!user) {
-        throw createError({statusCode: 401, statusMessage:'Invalid user'});
-    }
-
-    // Verify current password with the hashed password stored in the database
-    const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
-
-    if (!isPasswordValid) {
-        throw createError({statusCode: 400, statusMessage:'Invalid password'});
-    }
-
-    // Hash the new password
-    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-
-    // Update user's password in the database
-    await prisma.user.update({
-        where: { id: userId },
-        data: { password: hashedNewPassword },
-    });
-
-    const newToken = await createJwtToken(user.id);
-    setCookie(event, 'token', newToken);
-
-    return { message: 'Password changed successfully' };
-    
-};
 
 export async function deleteAccount(event: H3Event) {
 
@@ -206,4 +155,57 @@ export async function deleteAccount(event: H3Event) {
     setCookie(event, "user", "", { maxAge: -1 }); // Correctly remove the user cookie
 
     return { message: 'Account deleted successfully' };
+};
+
+
+export async function changePassword(event: H3Event) { 
+
+    const body = await readBody(event);
+
+    const { currentPassword, newPassword, confirmedNewPassword } = body;
+
+    // Validate presence of all required fields
+    if (!currentPassword || !newPassword || !confirmedNewPassword) {
+        throw createError({statusCode: 400, statusMessage:'Missing fields'});
+    }
+
+    // Check if newPassword and confirmedNewPassword match
+    if (newPassword !== confirmedNewPassword) {
+        throw createError({statusCode: 400, statusMessage:'Passwords do not match'});
+    }
+
+    //Parse the cookies from the request headers
+    const cookies = parseCookies(event);
+    console.log(cookies);
+    const userId = Number(cookies.id); // Convert cookie ID to number
+
+    const user = await prisma.user.findUnique({
+        where: { id: userId },
+    });
+    // Check if user exists
+    if (!user) {
+        throw createError({statusCode: 401, statusMessage:'Invalid user'});
+    }
+
+    // Verify current password with the hashed password stored in the database
+    const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
+
+    if (!isPasswordValid) {
+        throw createError({statusCode: 400, statusMessage:'Invalid password'});
+    }
+
+    // Hash the new password
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update user's password in the database
+    await prisma.user.update({
+        where: { id: userId },
+        data: { password: hashedNewPassword },
+    });
+
+    const newToken = await createJwtToken(user.id);
+    setCookie(event, 'token', newToken);
+
+    return { message: 'Password changed successfully' };
+    
 };

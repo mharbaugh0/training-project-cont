@@ -163,7 +163,7 @@ async function onSubmitName() {
   console.log('Submitted form:', nameForm);
 
   try {
-    const response = await $fetch('/api/user', {
+    const response = await $fetch('/api/user/me', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -192,7 +192,7 @@ async function onSubmitEmail() {
   try {
     console.log(token);
 
-    const response = await $fetch('/api/user', {
+    const response = await $fetch('/api/user/me', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -216,7 +216,7 @@ async function onSubmitPassword() {
 
   try {
 
-    const response = await $fetch('/api/user', {
+    const response = await $fetch('/api/user/me', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -238,7 +238,7 @@ async function onSubmitPassword() {
 async function onDeleteAccount() {
   try {
 
-    const response = await fetch('/api/user', {
+    const response = await fetch('/api/user/me', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 import { defineEventHandler, readBody } from 'h3';
-import { deleteAccount } from '../controllers/settingsController';
+import { deleteAccount } from '../../userService';
 
 
 export default defineEventHandler(async (event) => {
