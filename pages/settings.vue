@@ -139,10 +139,10 @@ const items = [
   { slot: 'Deletion', label: 'Delete Account' }
 ];
 
-// const currentNameCookie = useCookie('name');
-// console.log(currentNameCookie);
-const name = ref<string | null>();
-const router = useRouter();
+//Variables for page
+const displayName = useCookie('name').value;
+const name = ref<string | null>(displayName);
+
 
 // Form variables
 const emailForm = reactive({ currentEmail: '', newEmail: '', confirmedNewEmail: '' });

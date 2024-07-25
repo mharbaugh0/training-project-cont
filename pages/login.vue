@@ -44,7 +44,6 @@
 
 
 <script setup lang="ts">
-import { use } from 'h3';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 

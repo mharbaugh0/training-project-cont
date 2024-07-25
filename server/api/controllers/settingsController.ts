@@ -1,9 +1,7 @@
 import { readBody, parseCookies, H3Event } from 'h3';
 import bcrypt from 'bcrypt';
 import prisma from '../../../database/db';
-import { checkJwtToken, createJwtToken } from '~/jwt';
-import { useCookie } from 'nuxt/app';
-import logoutPost from '../auth/logout.post';
+import { createJwtToken } from '~/jwt';
 
 export async function changeDisplayName(event: H3Event) {
     const body = await readBody(event);

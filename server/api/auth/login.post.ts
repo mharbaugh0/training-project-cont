@@ -11,15 +11,16 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 405, statusMessage: 'Method not allowed' });
   }
 
+  //Reading the body of the request and splitting it into name, email, and password
   const body = await readBody(event);
-  console.log('Request body:', body);
-
   const { email, password } = body;
 
+  // Validate presence of email and password
   if (!email || !password) {
     throw createError({ statusCode: 400, statusMessage: 'Missing email or password' });
   }
 
+  // Check if user exists
   const user = await prisma.user.findUnique({
     where: {
        email: email

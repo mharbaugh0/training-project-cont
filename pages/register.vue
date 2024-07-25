@@ -24,7 +24,7 @@
       </div>
       <UButton variant="soft" type="submit">Register</UButton>
     </form>
-    <div v-if="error" style="color: red; font-weight: bold;">{{ error }}</div>        
+    <div v-if="registerError" style="color: red; font-weight: bold;">{{ registerError }}</div>        
   </div>
 </template>
 
@@ -44,7 +44,7 @@ const name = ref('');
 const email = ref('');
 const password = ref('');
 const confirmPassword = ref('');
-const error = ref<string | null>(null);
+const registerError = ref<string | null>(null);
 const router = useRouter();
 
 
@@ -62,13 +62,19 @@ const register = async () => {
       })
     }).then((data: any)=>{ 
       if (data.success) {
+
         router.push('/login');
+      
       } else {
-        error.value = data.message;
+        
+        registerError.value = data.message;
+      
       }
-      }).catch((err: any)=>{
-        error.value = err.message;
-        });
+      }).catch((error: any)=>{
+        
+        registerError.value = error.statusMessage;
+        
+      });
     }
 </script>
 

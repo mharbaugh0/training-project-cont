@@ -13,8 +13,7 @@ export interface User {
 export default defineEventHandler(async (event) => {
   //Checking if the request method is POST
   if (event.req.method !== 'POST') {
-    event.res.statusCode = 405;
-    return { message: 'Method not allowed' };
+    throw createError({ statusCode: 405, statusMessage: 'Method not allowed' });
   }
 
   //Reading the body of the request and splitting it into name, email, and password
@@ -23,15 +22,12 @@ export default defineEventHandler(async (event) => {
 
   //If the name, email, or password fields are missing, send a message
   if (!name || !email || !password || !confirmPassword) {
-    event.res.statusCode = 400;
-    return ('Missing fields');
+    throw createError({ statusCode: 400, statusMessage: 'Missing fields' });
   }
 
   // Check if the password and password confirmation match
   if (password !== confirmPassword) {
-    event.res.statusCode = 400;
-    console.log('Passwords do not match');
-    return ('Passwords do not match');
+    throw createError({ statusCode: 400, statusMessage: 'Passwords do not match' });
   }
 
   // Check if the user exists
@@ -50,6 +46,7 @@ export default defineEventHandler(async (event) => {
       success: false
     }
   } else {
+    
     // Successfully login
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -65,6 +62,7 @@ export default defineEventHandler(async (event) => {
 
       // Construct a new object without the password property
       const { password, ...userWithoutPassword } = createUser;
+
       // Ensure userWithoutPassword is of type User and assign success
       const result: User = { ...userWithoutPassword, success: true };
 
@@ -72,9 +70,10 @@ export default defineEventHandler(async (event) => {
       prisma.$disconnect();
 
       return result;
+
     } catch (error: any) {
-      event.res.statusCode = 500;
-      return { message: 'User creation failed', error: error.message };
+
+      throw createError({ statusCode: 500, statusMessage: error.message });
     }
   }
 });
