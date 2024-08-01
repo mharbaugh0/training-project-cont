@@ -22,7 +22,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      PRISMA_DATABASE_CONNECTION_URL: "mysql://${MYSQL_USER}:${MYSQL_ROOT_PASSWORD}@db:3306/${MYSQL_DATABASE}"
+      PRISMA_DATABASE_CONNECTION_URL: "mysql://root:${MYSQL_ROOT_PASSWORD}@db:3306/${MYSQL_DATABASE}"
       APP_PORT: ${APP_PORT}
       DB_PORT: ${DB_PORT}
     command: /app/docker/entrypoint.sh
@@ -37,6 +37,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 15s

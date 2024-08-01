@@ -3,6 +3,9 @@
 # Used to connect to the database directly 
 MYSQL_USER=
 
+#The password for the MYSQL user to access the database:
+MYSQL_PASSWORD=
+
 # The root password for MySQL (ensure it is secure)
 # Illegal special characters (Don't use these): @ ` ' " ; & | $ % \ / < > ( ) * ? [ ] { } 
 MYSQL_ROOT_PASSWORD=
