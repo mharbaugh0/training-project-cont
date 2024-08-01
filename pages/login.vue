@@ -49,7 +49,7 @@ import { useRouter } from 'vue-router';
 
 definePageMeta({
         layout: 'public',
-        middleware: 'not-auth'
+        middleware: 'no-auth-required'
     })
 
 /// Define the form and error refs

@@ -33,7 +33,7 @@
 
 definePageMeta({
         layout: 'public',
-        middleware: 'not-auth'
+        middleware: 'no-auth-required'
     })
 
 import { ref } from 'vue';

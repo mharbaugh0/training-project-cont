@@ -11,7 +11,7 @@ import { useRouter } from 'vue-router';
 
 definePageMeta({
         layout: 'default',
-        middleware: 'auth'
+        middleware: 'require-auth'
     })
 
 // console.log(useCookie('name'))

@@ -129,7 +129,7 @@ import { useRouter } from 'vue-router';
 
 definePageMeta({
   layout: 'default',
-  middleware: 'auth'
+  middleware: 'require-auth'
 });
 
 const items = [

@@ -1,3 +1,7 @@
+//The purpose of this middleware is to check if the user is authenticated and if so, 
+//redirect them to the welcome page. This route is used to access pages only for unauthenticated users,
+//like the registeration and login pages.
+
 // Define a Nuxt route middleware to check if the user is not authenticated
 export default defineNuxtRouteMiddleware(async () => {
   console.log('Not-Auth Middleware: Checking authentication');
