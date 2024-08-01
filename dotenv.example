@@ -1,15 +1,15 @@
-# Database container credentials (Username required, Password not used)
-# The username for the database container (e.g., root_user)
+# MySQL database credentials (All required)
+# The username for the MYSQL DATABASE (e.g., root_user)
 # Used to connect to the database directly 
 MYSQL_USER=
 
-# MySQL database credentials (All required)
 # The root password for MySQL (ensure it is secure)
 # Illegal special characters (Don't use these): @ ` ' " ; & | $ % \ / < > ( ) * ? [ ] { } 
 MYSQL_ROOT_PASSWORD=
 
 # The name of the MySQL database to create/use
 MYSQL_DATABASE=
+
 
 # JSON Web Token secret (Required)
 # A secret key used for generating and signing JSON Web Tokens for authentication
