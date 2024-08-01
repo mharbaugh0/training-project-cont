@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/ui"],
+  devServer: {
+    port: Number(process.env.APP_PORT),
+  },
   
   typescript: {
     strict: false,

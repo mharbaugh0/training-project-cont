@@ -17,7 +17,7 @@ COPY docker/entrypoint.sh /app/docker/entrypoint.sh
 RUN chmod +x /app/docker/entrypoint.sh
 
 # Expose the port Nuxt will run on
-EXPOSE 3000
+EXPOSE ${APP_PORT}
 
 # Use custom entrypoint script
 ENTRYPOINT ["./docker/entrypoint.sh"]
