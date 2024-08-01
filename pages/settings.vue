@@ -160,6 +160,8 @@ const token = useCookie('token') ;
 
 
 async function onSubmitName() {
+
+  
   console.log('Submitted form:', nameForm);
 
   try {
@@ -177,8 +179,6 @@ async function onSubmitName() {
 
     // Clear the error message for the "Name" tab
     nameError.value = null;
-
-    await navigateTo('/login');
 
   } catch (error: any) {
     // Set the error message for the "Name" tab only
@@ -204,8 +204,6 @@ async function onSubmitEmail() {
     // Clear the error message for the "Email" tab
     emailError.value = null;
 
-    await navigateTo('/login');
-
   } catch (error: any) {
     emailError.value = error.statusMessage;
   }
@@ -227,8 +225,6 @@ async function onSubmitPassword() {
 
     // Clear the error message for the "Password" tab
     passwordError.value = null;
-
-    await navigateTo('/login');
     
   } catch (error: any) {
     passwordError.value = error.statusMessage;

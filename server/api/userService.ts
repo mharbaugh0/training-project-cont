@@ -1,7 +1,7 @@
 import { readBody, parseCookies, H3Event } from 'h3';
 import bcrypt from 'bcrypt';
 import prisma from '../../database/db';
-import { createJwtToken } from '~/jwt';
+import { createJwtToken, extractUserIdFromToken } from '~/jwt';
 
 export async function changeDisplayName(event: H3Event) {
     const body = await readBody(event);
@@ -12,7 +12,12 @@ export async function changeDisplayName(event: H3Event) {
     }
 
     const cookies = parseCookies(event);
-    const userId = Number(cookies.id); // Convert cookie ID to number
+    const extractedUserId = await extractUserIdFromToken(cookies.token);
+    const userId = extractedUserId !== null ? extractedUserId : undefined;
+
+    if (userId === undefined) {
+        throw createError({statusCode: 401, statusMessage:'Invalid user'});
+    }
 
     const user = await prisma.user.findUnique({ where: { id: userId } });
 
@@ -52,7 +57,12 @@ export async function changeEmail(event: H3Event) {
     
     // Parse the cookies from the request headers
     const cookies = parseCookies(event);
-    const userId = Number(cookies.id); // Convert cookie ID to number
+    const extractedUserId = await extractUserIdFromToken(cookies.token);
+    const userId = extractedUserId !== null ? extractedUserId : undefined;
+
+    if (userId === undefined) {
+        throw createError({statusCode: 401, statusMessage:'Invalid user'});
+    }
 
     const user = await prisma.user.findUnique({
         where: { id: userId },
@@ -87,9 +97,8 @@ export async function changeEmail(event: H3Event) {
         data: { email: confirmedNewEmail },
     });
 
-    const newToken = await createJwtToken(user.id);
-    setCookie(event, 'token', newToken);
-    setCookie(event, 'email', confirmedNewEmail);
+    setCookie(event, "token", "", { maxAge: -1 }); // Correctly remove the token cookie
+    setCookie(event, "user", "", { maxAge: -1 }); // Correctly remove the user cookie
 
     return { message: 'Email changed successfully',
             success: false
@@ -117,7 +126,12 @@ export async function deleteAccount(event: H3Event) {
 
     // Parse the cookies from the request headers
     const cookies = parseCookies(event);
-    const userId = Number(cookies.id); // Convert cookie ID to number
+    const extractedUserId = await extractUserIdFromToken(cookies.token);
+    const userId = extractedUserId !== null ? extractedUserId : undefined;
+
+    if (userId === undefined) {
+        throw createError({statusCode: 401, statusMessage:'Invalid user'});
+    }
 
     const user = await prisma.user.findUnique({
         where: { id: userId },
@@ -176,8 +190,12 @@ export async function changePassword(event: H3Event) {
 
     //Parse the cookies from the request headers
     const cookies = parseCookies(event);
-    console.log(cookies);
-    const userId = Number(cookies.id); // Convert cookie ID to number
+    const extractedUserId = await extractUserIdFromToken(cookies.token);
+    const userId = extractedUserId !== null ? extractedUserId : undefined;
+
+    if (userId === undefined) {
+        throw createError({statusCode: 401, statusMessage:'Invalid user'});
+    }
 
     const user = await prisma.user.findUnique({
         where: { id: userId },
@@ -203,8 +221,8 @@ export async function changePassword(event: H3Event) {
         data: { password: hashedNewPassword },
     });
 
-    const newToken = await createJwtToken(user.id);
-    setCookie(event, 'token', newToken);
+    setCookie(event, "token", "", { maxAge: -1 }); // Correctly remove the token cookie
+    setCookie(event, "user", "", { maxAge: -1 }); // Correctly remove the user cookie
 
     return { message: 'Password changed successfully' };
     
