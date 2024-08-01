@@ -11,9 +11,8 @@ We were tasked with designing and creating a development skeleton for future Bio
   - Create a demonstrative project for career development.
 
 ### Future Enhancements
-- Incorporate artificial intelligence.
-- Add onboarding and training information.
-- Track user progress and more.
+- Branch and customize for personal projects/career development
+- Use as guide for future interns
 
 ### Technologies used
 - Nuxt 3.12
@@ -85,11 +84,13 @@ This is the page that appears when the application is first initialized.
   ![Welcome page](readme-images/welcome.png)
 
 ### Settings Page
-# User's are able to:
+# Users are able to:
 - Change their display name.
 - Change their account email.
 - Change their account password.
 - Delete their account.
+
+Changes are handled via API requests, handlers located in server folder
 
 ![Settings page, display name tab](readme-images/settings.png)
 
@@ -100,6 +101,7 @@ This is the page that appears when the application is first initialized.
 ![Settings page, delete account tab](readme-images/settings3.png)
 
 
+
 ## Acknowledgements
 - [Nuxt UI official documentation](https://ui.nuxt.com/getting-started)
 - [Best README Template](https://github.com/othneildrew/Best-README-Template)
@@ -107,12 +109,13 @@ This is the page that appears when the application is first initialized.
 - [Nuxt sandbox (StackBlitz)](https://stackblitz.com/github/nuxt/starter/tree/v3?file=README.md)
 - [Getting Started With Nuxt UI by John Komarnicki](https://www.youtube.com/watch?v=SE_ysS_ZXbk&t=1272s)
 - [Tailwind CSS styling help](https://tailwindcss.com/docs/flex-basis)
+- [Consola Logging](https://github.com/unjs/consola)
 
 ## License
 Distributed under the BSD 2-Clause License. See `LICENSE.md` for more information.
 
 ## Contact
 For further information, contact:
-- [mharbaugh@bioneos.com](mailto:mharbaugh@bioneos.com)
-- [zhasabrabu@bioneos.com](mailto:zhasabrabu@bioneos.com)
+- [mharbaugh@bioneos.com (Summer 2024 Development Intern)](mailto:mharbaugh@bioneos.com)
+- [zhasabrabu@bioneos.com Summer 2024 Development Intern)](mailto:zhasabrabu@bioneos.com)
 - [sgdavis@bioneos.com](mailto:sgdavis@bioneos.com)
