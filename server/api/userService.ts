@@ -106,7 +106,61 @@ export async function changeEmail(event: H3Event) {
     
 };
 
+export async function changePassword(event: H3Event) { 
 
+    const body = await readBody(event);
+
+    const { currentPassword, newPassword, confirmedNewPassword } = body;
+
+    // Validate presence of all required fields
+    if (!currentPassword || !newPassword || !confirmedNewPassword) {
+        throw createError({statusCode: 400, statusMessage:'Missing fields'});
+    }
+
+    // Check if newPassword and confirmedNewPassword match
+    if (newPassword !== confirmedNewPassword) {
+        throw createError({statusCode: 400, statusMessage:'Passwords do not match'});
+    }
+
+    //Parse the cookies from the request headers
+    const cookies = parseCookies(event);
+    const extractedUserId = await extractUserIdFromToken(cookies.token);
+    const userId = extractedUserId !== null ? extractedUserId : undefined;
+
+    if (userId === undefined) {
+        throw createError({statusCode: 401, statusMessage:'Invalid user'});
+    }
+
+    const user = await prisma.user.findUnique({
+        where: { id: userId },
+    });
+    // Check if user exists
+    if (!user) {
+        throw createError({statusCode: 401, statusMessage:'Invalid user'});
+    }
+
+    // Verify current password with the hashed password stored in the database
+    const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
+
+    if (!isPasswordValid) {
+        throw createError({statusCode: 400, statusMessage:'Invalid password'});
+    }
+
+    // Hash the new password
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update user's password in the database
+    await prisma.user.update({
+        where: { id: userId },
+        data: { password: hashedNewPassword },
+    });
+
+    setCookie(event, "token", "", { maxAge: -1 }); // Correctly remove the token cookie
+    setCookie(event, "user", "", { maxAge: -1 }); // Correctly remove the user cookie
+
+    return { message: 'Password changed successfully' };
+    
+};
 
 export async function deleteAccount(event: H3Event) {
 
@@ -169,61 +223,4 @@ export async function deleteAccount(event: H3Event) {
     setCookie(event, "user", "", { maxAge: -1 }); // Correctly remove the user cookie
 
     return { message: 'Account deleted successfully' };
-};
-
-
-export async function changePassword(event: H3Event) { 
-
-    const body = await readBody(event);
-
-    const { currentPassword, newPassword, confirmedNewPassword } = body;
-
-    // Validate presence of all required fields
-    if (!currentPassword || !newPassword || !confirmedNewPassword) {
-        throw createError({statusCode: 400, statusMessage:'Missing fields'});
-    }
-
-    // Check if newPassword and confirmedNewPassword match
-    if (newPassword !== confirmedNewPassword) {
-        throw createError({statusCode: 400, statusMessage:'Passwords do not match'});
-    }
-
-    //Parse the cookies from the request headers
-    const cookies = parseCookies(event);
-    const extractedUserId = await extractUserIdFromToken(cookies.token);
-    const userId = extractedUserId !== null ? extractedUserId : undefined;
-
-    if (userId === undefined) {
-        throw createError({statusCode: 401, statusMessage:'Invalid user'});
-    }
-
-    const user = await prisma.user.findUnique({
-        where: { id: userId },
-    });
-    // Check if user exists
-    if (!user) {
-        throw createError({statusCode: 401, statusMessage:'Invalid user'});
-    }
-
-    // Verify current password with the hashed password stored in the database
-    const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
-
-    if (!isPasswordValid) {
-        throw createError({statusCode: 400, statusMessage:'Invalid password'});
-    }
-
-    // Hash the new password
-    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-
-    // Update user's password in the database
-    await prisma.user.update({
-        where: { id: userId },
-        data: { password: hashedNewPassword },
-    });
-
-    setCookie(event, "token", "", { maxAge: -1 }); // Correctly remove the token cookie
-    setCookie(event, "user", "", { maxAge: -1 }); // Correctly remove the user cookie
-
-    return { message: 'Password changed successfully' };
-    
 };
