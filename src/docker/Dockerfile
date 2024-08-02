@@ -11,13 +11,13 @@ RUN apt-get update && apt-get install -y openssl
 COPY package.json package-lock.json ./
 
 # Copy the entrypoint script
-COPY docker/entrypoint.sh /app/docker/entrypoint.sh
+COPY src/docker/entrypoint.sh /app/src/docker/entrypoint.sh
 
 # Make the entrypoint script executable
-RUN chmod +x /app/docker/entrypoint.sh
+RUN chmod +x /app/src/docker/entrypoint.sh
 
 # Expose the port Nuxt will run on
 EXPOSE ${APP_PORT}
 
 # Use custom entrypoint script
-ENTRYPOINT ["./docker/entrypoint.sh"]
+ENTRYPOINT ["./src/docker/entrypoint.sh"]

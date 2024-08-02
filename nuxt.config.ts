@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   devServer: {
     port: Number(process.env.APP_PORT),
   },
+  srcDir: "src/",
   
   typescript: {
     strict: false,

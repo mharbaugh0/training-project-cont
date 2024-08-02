@@ -4,20 +4,20 @@ services:
   app:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: src/docker/Dockerfile
     ports:
       - "127.0.0.1:${APP_PORT}:${APP_PORT}"
     volumes:
-      - .:/app
-      # - type: bind
-      #   source: .
-      #   target: /app
-      # - type: volume
-      #   source: trainingproject-node-modules
-      #   target: /app/node_modules
-      # - type: volume
-      #   source: trainingproject-nuxt
-      #   target: /app/.nuxt
+      # - .:/app
+      - type: bind
+        source: .
+        target: /app
+      - type: volume
+        source: trainingproject-node-modules
+        target: /app/node_modules
+      - type: volume
+        source: trainingproject-nuxt
+        target: /app/.nuxt
     depends_on:
       db:
         condition: service_healthy
@@ -30,7 +30,7 @@ services:
   db:
     build:
       context: .
-      dockerfile: docker/Dockerfile.db
+      dockerfile: src/docker/Dockerfile.db
     ports:
       - "127.0.0.1:${DB_PORT}:${DB_PORT}"
     environment:
@@ -44,6 +44,6 @@ services:
       timeout: 10s
       retries: 3
 
-# volumes:
-#   trainingproject-node-modules:
-#   trainingproject-nuxt:
+volumes:
+  trainingproject-node-modules:
+  trainingproject-nuxt:
