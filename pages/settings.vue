@@ -244,7 +244,7 @@ async function onSubmitPassword() {
 async function onDeleteAccount() {
   try {
 
-    const response = await fetch('/api/user/me', {
+    const response = await $fetch('/api/user/me', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -252,8 +252,6 @@ async function onDeleteAccount() {
       },
       body: JSON.stringify(deletionForm), // Ensure the body is included in the DELETE request
     });
-
-
     // Clear the error message for the "Delete Account" tab
     deletionError.value = null;
 
