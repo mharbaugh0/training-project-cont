@@ -11,3 +11,6 @@ npx prisma migrate dev
 
 # Start the application
 npm run dev
+
+
+git restore .nuxt/.gitkeep
