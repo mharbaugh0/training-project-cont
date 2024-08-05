@@ -47,12 +47,59 @@ We were tasked with designing and creating a development skeleton for future Bio
     docker compose up --build 
     ```
 
+### Installation
+
+1. **Clone the repository:**
+
+   ```sh
+   git clone https://github.com/bioneos/training-project.git
+   ```
+2. **Set up the environment variables:**
+- Create a `.env` file.
+- Copy the contents of `dotenv.example` to your `.env` and update them with your desired values.
+
+### Running the project
+
+1. **Start the docker containers**
+
+    ```sh 
+    docker compose up --build 
+    ```
+
 2. **Access the application:**
 - Open your browser and navigate to:
     ```sh
-    http://localhost:3000
-    ```
+    http://localhost:${APP_PORT} 
 
+    ```
+    APP_PORT is the port value you set up in your `.env` file.
+
+- The correct link will also come up in your container log when starting up the Docker container :
+
+    ![Container Log Link](readme-images/appLink.png)
+
+3. **Accessing your development environment**
+- We want to write our code while inside of the app container created by docker (training-project-app-1). This can be done differently based on the IDE being used. We will show you how to do it in VSCode.
+
+  - VSCode
+    1. If not installed already, make sure you have the Remote Explorer extension installed. 
+
+        ![Remote Explorer Extension](readme-images/devEnv1.png)
+
+    2. Navigate to the Reemote Explorer tab.
+
+        ![Remote Explorer Tab](readme-images/remoteExplorerIcon.png)
+    
+    3. Navigate to the training-project-app-1 container and click on the "Attach in current window option". 
+
+        ![Remote Explorer Dev Container](readme-images/devEnv2.png)
+    
+    4. Now you can edit the files from within the container! To view the docker logs while in the container, navigate to the remote explorer tab and right-click the container. Select the "Show Container Log" option. Then the container will be displayed in the terminal tab!
+
+
+        ![Show Container Log](readme-images/containerLog1.png)
+
+        ![Container Log](readme-images/containerLog2.png)
 ## Features
 
 ### Landing Page

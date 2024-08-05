@@ -5,7 +5,7 @@ FROM node:20-slim
 WORKDIR /app
 
 # Install dependencies
-RUN apt-get update && apt-get install -y openssl
+RUN apt-get update && apt-get install -y openssl && apt-get -y install git
 
 # Install app dependencies
 COPY package.json package-lock.json ./
