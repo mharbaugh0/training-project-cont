@@ -86,7 +86,7 @@ We were tasked with designing and creating a development skeleton for future Bio
 
         ![Remote Explorer Extension](readme-images/devEnv1.png)
 
-    2. Navigate to the Reemote Explorer tab.
+    2. Navigate to the Remote Explorer tab.
 
         ![Remote Explorer Tab](readme-images/remoteExplorerIcon.png)
     
