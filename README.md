@@ -69,7 +69,7 @@ We were tasked with designing and creating a development skeleton for future Bio
 2. **Access the application:**
 - Open your browser and navigate to:
     ```sh
-    http://localhost:${APP_PORT} 
+    http://localhost:[APP_PORT] 
 
     ```
     APP_PORT is the port value you set up in your `.env` file.
@@ -79,7 +79,8 @@ We were tasked with designing and creating a development skeleton for future Bio
     ![Container Log Link](readme-images/appLink.png)
 
 3. **Accessing your development environment**
-- We want to write our code while inside of the app container created by docker (training-project-app-1). This can be done differently based on the IDE being used. We will show you how to do it in VSCode.
+- We want to write our code while inside of the app container created by docker (training-project-app-1). 
+This can be done differently based on the IDE being used. We will show you how to do it in VSCode.
 
   - VSCode
     1. If not installed already, make sure you have the Remote Explorer extension installed. 
@@ -94,12 +95,24 @@ We were tasked with designing and creating a development skeleton for future Bio
 
         ![Remote Explorer Dev Container](readme-images/devEnv2.png)
     
-    4. Now you can edit the files from within the container! To view the docker logs while in the container, navigate to the remote explorer tab and right-click the container. Select the "Show Container Log" option. Then the container will be displayed in the terminal tab!
+    4. Now you can edit the files from within the container! To view the docker logs while in the container, 
+    navigate to the remote explorer tab and right-click the container. Select the "Show Container Log" option. 
+    The container will then be displayed in the terminal tab!
 
 
         ![Show Container Log](readme-images/containerLog1.png)
 
         ![Container Log](readme-images/containerLog2.png)
+
+    5. To access the database container, repeat step 3 for the training-project-db-1 container. You will need to 
+    go into this container so you can access the contents of the database being used for the app. 
+    You can use this following command in the terminal of the container to access the database 
+    (use the values created in your .env) :
+
+        ```
+        mysql -u[MYSQL_USER] -p[MYSQL_PASSWORD] [MYSQL_DATABASE]
+        ```
+
 ## Features
 
 ### Landing Page
