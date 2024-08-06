@@ -27,7 +27,6 @@ We were tasked with designing and creating a development skeleton for future Bio
 ### Ensure you have the following installed: 
 - Docker
 
-
 ### Installation
 
 1. **Clone the repository:**
@@ -44,26 +43,7 @@ We were tasked with designing and creating a development skeleton for future Bio
 1. **Start the docker containers**
 
     ```sh 
-    docker compose up --build 
-    ```
-
-### Installation
-
-1. **Clone the repository:**
-
-   ```sh
-   git clone https://github.com/bioneos/training-project.git
-   ```
-2. **Set up the environment variables:**
-- Create a `.env` file.
-- Copy the contents of `dotenv.example` to your `.env` and update them with your desired values.
-
-### Running the project
-
-1. **Start the docker containers**
-
-    ```sh 
-    docker compose up --build 
+    bash start-app.sh
     ```
 
 2. **Access the application:**
@@ -104,7 +84,7 @@ This can be done differently based on the IDE being used. We will show you how t
 
         ![Container Log](readme-images/containerLog2.png)
 
-    5. To access the database container, repeat step 3 for the training-project-db-1 container. You will need to 
+    5. To access the database container, repeat step c for the training-project-db-1 container. You will need to 
     go into this container so you can access the contents of the database being used for the app. 
     You can use this following command in the terminal of the container to access the database 
     (use the values created in your .env) :
