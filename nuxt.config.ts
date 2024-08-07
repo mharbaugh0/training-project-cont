@@ -14,7 +14,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     jwtSecret: process.env.JWT_SECRET,
   },
-  
-  
+
+  hooks: {
+    'build:done': () => {
+      const { execSync } = require('child_process');
+      execSync('git restore .nuxt/.gitkeep');
+      execSync('touch node_modules/.gitkeep');
+    }
+  },
 
 });
