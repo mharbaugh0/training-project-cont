@@ -1,16 +1,18 @@
 # Dockerfile
 FROM node:20-slim
 
-# Map host system's user id and group to afs user in container
-# So that when we bind mount our files into the container
-# # we don't get weird permission issues
-# ARG UID=1001
-# ARG GID=1500
-# ARG UNAME=zhasabrabu
-# ARG UGROUP=bioneos
+# # "Not Windows
+# # Map host system's user id and group to user in container
+# # So that when we bind mount our files into the container
+# # there are not any permission issues
+# ARG UID
+# ARG GID
+# ARG UNAME=[Pick your Name]
+# ARG UGROUP=[Pick your Group]
 
 RUN apt-get update && apt-get install -y openssl && apt-get -y install git && apt-get -y install vim
 
+# # Not Windows
 # RUN echo GID=${GID} UGROUP=${UGROUP}
 # # Create our user
 # RUN groupadd -g ${GID} -o ${UGROUP}
@@ -18,6 +20,8 @@ RUN apt-get update && apt-get install -y openssl && apt-get -y install git && ap
 
 # Create app directory
 WORKDIR /app
+
+# # Not Windows
 # COPY --chown=${UNAME}:${UGROUP} . .
 
 # Copy the entrypoint script
@@ -35,6 +39,7 @@ EXPOSE ${APP_PORT}
 # Use custom entrypoint script
 ENTRYPOINT ["./src/docker/entrypoint.sh"]
 
+# # Not Windows
 # USER ${UNAME}
 
 

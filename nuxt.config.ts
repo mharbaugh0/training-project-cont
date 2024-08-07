@@ -19,7 +19,7 @@ export default defineNuxtConfig({
     'build:done': () => {
       const { execSync } = require('child_process');
       execSync('git restore .nuxt/.gitkeep');
-      execSync('touch node_modules/.gitkeep');
+      execSync('git restore node_modules/.gitkeep');
     }
   },
 
