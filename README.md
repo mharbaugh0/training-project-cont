@@ -46,7 +46,8 @@ We were tasked with designing and creating a development skeleton for future Bio
     bash start-app.sh
     ```
 
-    or if you are running docker in a windows wsl2 distro, go to docker/Dockerfile and comment out the lines labeled "Not Windows".
+    or if you are running docker in a windows wsl2 distro, go to docker/Dockerfile and comment out the lines labeled "Not Windows". 
+    Also, update the UNAME and UGROUP values to what you want.
 
     ```
     docker compose up --build
