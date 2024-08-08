@@ -22,7 +22,10 @@
           <UInput v-model="confirmPassword" type="password" icon="i-heroicons-lock-closed" />
         </UFormGroup>
       </div>
-      <UButton variant="soft" type="submit">Register</UButton>
+      <div id="registerContinue" class="grid grid-cols-5 gap-4 mt-3">
+        <UButton variant="soft" class="col-start-2 col-end-3 inline-block" type="submit">Register</UButton> 
+        <UButton variant="soft" class="col-start-4 col-end-5 inline-block"> OR Create Account via SSO </UButton>
+      </div>
     </form>
     <div v-if="registerError" style="color: red; font-weight: bold;">{{ registerError }}</div>        
   </div>
@@ -87,4 +90,5 @@ button {
   margin-top: 10px;
   margin-left: 20px;
 }
+
 </style>
