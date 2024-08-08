@@ -7,8 +7,10 @@ FROM node:20-slim
 # there are not any permission issues
 ARG UID
 ARG GID
+# Update UNAME and UGROUP to whatever you like 
 ARG UNAME=[Pick your Name]
 ARG UGROUP=[Pick your Group]
+
 
 RUN apt-get update && apt-get install -y openssl && apt-get -y install git && apt-get -y install vim
 
