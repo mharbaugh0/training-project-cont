@@ -1,7 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxt/ui"],
+  modules: ["@nuxt/ui", '@sidebase/nuxt-auth'],
+  auth: {
+    enableGlobalAppMiddleware: true,
+  },
   devServer: {
     port: Number(process.env.APP_PORT),
   },
@@ -13,6 +16,10 @@ export default defineNuxtConfig({
   
   runtimeConfig: {
     jwtSecret: process.env.JWT_SECRET,
+    GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
+    public: {
+      GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
+    },
   },
 
   hooks: {
